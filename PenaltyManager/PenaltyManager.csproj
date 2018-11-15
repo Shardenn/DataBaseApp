@@ -61,26 +61,26 @@
     <Compile Include="ColorAddition.Designer.cs">
       <DependentUpon>ColorAddition.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ColorAddition.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ColorAddition.Designer.cs">
-      <DependentUpon>ColorAddition.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\Automobile.cs" />
     <Compile Include="DataModel\Color.cs" />
     <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="DataModel\DataHandling.cs" />
     <Compile Include="DataModel\Driver.cs" />
-    <Compile Include="UI\Form1.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
+    <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Insurance.cs" />
     <Compile Include="DataModel\Manufacturer.cs" />
     <Compile Include="DataModel\Model.cs" />
+    <Compile Include="ManufacturerUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManufacturerUpdate.Designer.cs">
+      <DependentUpon>ManufacturerUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoadPenaltiesDataSet.Designer.cs">
@@ -95,11 +95,11 @@
     <EmbeddedResource Include="ColorAddition.resx">
       <DependentUpon>ColorAddition.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ColorAddition.resx">
-      <DependentUpon>ColorAddition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Form1.resx">
+    <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManufacturerUpdate.resx">
+      <DependentUpon>ManufacturerUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,6 +136,8 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
