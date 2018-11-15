@@ -47,7 +47,7 @@ namespace PenaltyManager
 
             MainWindow main = (MainWindow)parentForm;
             if(main != null)
-                main.RefreshAllTables();
+                main.RefreshUtilityTables();
             Close();
         }
 
@@ -76,7 +76,7 @@ namespace PenaltyManager
 
             MainWindow main = (MainWindow)parentForm;
             if (main != null)
-                main.RefreshAllTables();
+                main.RefreshUtilityTables();
             Close();
         }
 

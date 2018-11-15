@@ -18,7 +18,7 @@ namespace PenaltyManager
             InitializeComponent();
         }
 
-        public void RefreshAllTables()
+        public void RefreshUtilityTables()
         {
             refresh_violation_types_table();
             refresh_colors_table();
@@ -45,7 +45,7 @@ namespace PenaltyManager
         private void Form1_Load(object sender, EventArgs e)
         {
             InitAllTables();
-            RefreshAllTables();
+            RefreshUtilityTables();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -65,7 +65,9 @@ namespace PenaltyManager
 
         private void button_add_violation_Click(object sender, EventArgs e)
         {
-
+            ViolationTypeUpdate violUpdateTable = new ViolationTypeUpdate(this);
+            violUpdateTable.Show();
+            Enabled = false;
         }
 
         private void button_add_color_Click(object sender, EventArgs e)

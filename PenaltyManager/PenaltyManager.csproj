@@ -92,6 +92,12 @@
     <Compile Include="DataModel\User.cs" />
     <Compile Include="DataModel\Violation.cs" />
     <Compile Include="DataModel\ViolationType.cs" />
+    <Compile Include="ViolationTypeUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViolationTypeUpdate.Designer.cs">
+      <DependentUpon>ViolationTypeUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ColorAddition.resx">
       <DependentUpon>ColorAddition.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +116,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ViolationTypeUpdate.resx">
+      <DependentUpon>ViolationTypeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -136,8 +145,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,10 +14,6 @@ namespace PenaltyManager
         [STAThread]
         static void Main()
         {
-            using (RoadPenaltyContext db = new RoadPenaltyContext())
-            {
-                
-            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
