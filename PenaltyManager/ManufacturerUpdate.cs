@@ -34,10 +34,28 @@ namespace PenaltyManager
         {
 
         }
-
+        
+        // remove button
         private void button_editRemove_Click(object sender, EventArgs e)
         {
+            var idText = textBox_id.Text;
+            var colorName = textBox_input.Text;
+            
+            int id;
+            if (!Int32.TryParse(idText, out id))
+            {
+                MainWindow.ShowError("Wrong ID input", "Error");
+                return;
+            }
 
+            RemoveManufacturer(id);
+
+            parentForm.Enabled = true;
+
+            MainWindow main = (MainWindow)parentForm;
+            if (main != null)
+                main.RefreshAllTables();
+            Close();
         }
 
         private void textBox_input_TextChanged(object sender, EventArgs e)
@@ -50,9 +68,9 @@ namespace PenaltyManager
 
         }
 
+        // add/edit button
         private void button_add_Click(object sender, EventArgs e)
         {
-            RoadPenaltyContext db = new RoadPenaltyContext();
             var manufacturerName = textBox_input.Text;
             if (manufacturerName == "")
             {
@@ -60,13 +78,67 @@ namespace PenaltyManager
                 return;
             }
 
-            Manufacturer newManufacturer = new Manufacturer { ManufacturerName = manufacturerName };
-            db.Manufacturers.Add(newManufacturer);
-            db.SaveChanges();
+            var idText = textBox_id.Text;
+            int id;
+            if (idText != "")
+            {
+                if (!Int32.TryParse(idText, out id))
+                {
+                    MainWindow.ShowError("Wromg ID input");
+                    return;
+                }
+                EditManufacturer(id, manufacturerName);
+            }
+            else
+                AddManufacturer(manufacturerName);
+
             parentForm.Enabled = true;
             MainWindow main = (MainWindow)parentForm;
             main.RefreshAllTables();
             Close();
+        }
+
+        private void AddManufacturer(string manufacturerName)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Manufacturer manufacturer = new Manufacturer { ManufacturerName = manufacturerName };
+            db.Manufacturers.Add(manufacturer);
+            db.SaveChanges();
+        }
+
+        private void EditManufacturer(int id, string newName)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+
+            Manufacturer manToUpdate = db.Manufacturers.Find(id);
+            if(manToUpdate == null)
+            {
+                MainWindow.ShowError("No manufacturer with such a key exists");
+                return;
+            }
+
+            manToUpdate.ManufacturerName = newName;
+            db.SaveChanges();
+        }
+
+        private void RemoveManufacturer(int id)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Manufacturer foundMan = db.Manufacturers.Find(id);
+
+            if(foundMan == null)
+            {
+                MainWindow.ShowError("No manufacturer with such a key exists");
+                return;
+            }
+
+            db.Manufacturers.Remove(foundMan);
+            db.SaveChanges();
+        }
+
+        private void ManufacturerUpdate_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Enabled = true;
         }
     }
 }

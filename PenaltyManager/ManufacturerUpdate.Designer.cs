@@ -31,10 +31,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button_editRemove = new System.Windows.Forms.Button();
+            this.button_remove = new System.Windows.Forms.Button();
             this.textBox_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button_add = new System.Windows.Forms.Button();
+            this.button_addEdit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -66,15 +66,15 @@
             this.label2.Text = "ID";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // button_editRemove
+            // button_remove
             // 
-            this.button_editRemove.Location = new System.Drawing.Point(33, 38);
-            this.button_editRemove.Name = "button_editRemove";
-            this.button_editRemove.Size = new System.Drawing.Size(83, 23);
-            this.button_editRemove.TabIndex = 10;
-            this.button_editRemove.Text = "Edit/Remove";
-            this.button_editRemove.UseVisualStyleBackColor = true;
-            this.button_editRemove.Click += new System.EventHandler(this.button_editRemove_Click);
+            this.button_remove.Location = new System.Drawing.Point(33, 38);
+            this.button_remove.Name = "button_remove";
+            this.button_remove.Size = new System.Drawing.Size(83, 23);
+            this.button_remove.TabIndex = 10;
+            this.button_remove.Text = "Remove";
+            this.button_remove.UseVisualStyleBackColor = true;
+            this.button_remove.Click += new System.EventHandler(this.button_editRemove_Click);
             // 
             // textBox_input
             // 
@@ -94,15 +94,15 @@
             this.label1.Text = "New manufacturer\r\nname";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button_add
+            // button_addEdit
             // 
-            this.button_add.Location = new System.Drawing.Point(235, 38);
-            this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(75, 23);
-            this.button_add.TabIndex = 7;
-            this.button_add.Text = "Add";
-            this.button_add.UseVisualStyleBackColor = true;
-            this.button_add.Click += new System.EventHandler(this.button_add_Click);
+            this.button_addEdit.Location = new System.Drawing.Point(235, 38);
+            this.button_addEdit.Name = "button_addEdit";
+            this.button_addEdit.Size = new System.Drawing.Size(75, 23);
+            this.button_addEdit.TabIndex = 7;
+            this.button_addEdit.Text = "Add/Edit";
+            this.button_addEdit.UseVisualStyleBackColor = true;
+            this.button_addEdit.Click += new System.EventHandler(this.button_add_Click);
             // 
             // ManufacturerUpdate
             // 
@@ -112,12 +112,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_id);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button_editRemove);
+            this.Controls.Add(this.button_remove);
             this.Controls.Add(this.textBox_input);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button_add);
+            this.Controls.Add(this.button_addEdit);
             this.Name = "ManufacturerUpdate";
-            this.Text = "ManufacturerUpdate";
+            this.Text = "Manufacturer update";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ManufacturerUpdate_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,9 +129,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_id;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button_editRemove;
+        private System.Windows.Forms.Button button_remove;
         private System.Windows.Forms.TextBox textBox_input;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_add;
+        private System.Windows.Forms.Button button_addEdit;
     }
 }

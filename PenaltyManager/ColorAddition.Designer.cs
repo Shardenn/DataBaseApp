@@ -113,7 +113,7 @@
             this.Controls.Add(this.button_add);
             this.Name = "ManufacturerAddition";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ColorAddition";
+            this.Text = "Color update";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ManufacturerAddition_FormClosed);
             this.Load += new System.EventHandler(this.ManufacturerAddition_Load);
             this.ResumeLayout(false);
