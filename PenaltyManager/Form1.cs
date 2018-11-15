@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PenaltyManager
@@ -30,6 +24,12 @@ namespace PenaltyManager
             init_colors_table();
             init_manufacturers_table();
             init_violation_types_table();
+            init_drivers_table();
+        }
+
+        public void RefreshManagementTables()
+        {
+            refresh_drivers_table();
         }
 
         public static void ShowError(string message, string title = "Error")
@@ -46,6 +46,8 @@ namespace PenaltyManager
         {
             InitAllTables();
             RefreshUtilityTables();
+            
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -89,7 +91,8 @@ namespace PenaltyManager
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_violation_types.Columns.Add("ID", "Violation type");
             grid_violation_types.Columns.Add("Fine", "Fine");
-            db.ViolationTypes.ToList().ForEach(e => grid_violation_types.Rows.Add(e.Type, e.Fine));
+            //db.ViolationTypes.ToList().ForEach(e => grid_violation_types.Rows.Add(e.Type, e.Fine));
+            refresh_violation_types_table();
         }
 
         private void refresh_violation_types_table()
@@ -104,7 +107,8 @@ namespace PenaltyManager
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_car_colors.Columns.Add("ID", "Color ID");
             grid_car_colors.Columns.Add("ColorName", "Color Name");
-            db.Colors.ToList().ForEach(e => grid_car_colors.Rows.Add(e.Id, e.ColorName));
+            //db.Colors.ToList().ForEach(e => grid_car_colors.Rows.Add(e.Id, e.ColorName));
+            refresh_colors_table();
         }
 
         private void refresh_colors_table()
@@ -119,7 +123,8 @@ namespace PenaltyManager
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_car_manufacturers.Columns.Add("ID", "Manufacturers ID");
             grid_car_manufacturers.Columns.Add("ColorName", "Manufacturer Name");
-            db.Manufacturers.ToList().ForEach(e => grid_car_manufacturers.Rows.Add(e.Id, e.ManufacturerName));
+            //db.Manufacturers.ToList().ForEach(e => grid_car_manufacturers.Rows.Add(e.Id, e.ManufacturerName));
+            refresh_manufacturers_table();
         }
 
         private void refresh_manufacturers_table()
@@ -131,13 +136,47 @@ namespace PenaltyManager
 
         private void button_remove_violation_Click(object sender, EventArgs e)
         {
-            RoadPenaltyContext db = new RoadPenaltyContext();
             
+        }
+
+        private void init_drivers_table()
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_drivers.Columns.Add("ID", "ID");
+            grid_drivers.Columns.Add("Name", "Full name");
+            grid_drivers.Columns.Add("License", "Driver's license number");
+            //db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
+            refresh_drivers_table();
+        }
+
+        private void refresh_drivers_table()
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_drivers.Rows.Clear();
+            db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
         }
 
         private void grid_car_colors_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void button_updateDrivers_Click(object sender, EventArgs e)
+        {
+            DriversUpdate drvUpdateForm = new DriversUpdate(this);
+            drvUpdateForm.Show();
+            Enabled = false;
+        }
+
+        private void button_updateInsurances_Click(object sender, EventArgs e)
+        {
+
+        }
+        
     }
 }

@@ -66,6 +66,12 @@
     <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="DataModel\DataHandling.cs" />
     <Compile Include="DataModel\Driver.cs" />
+    <Compile Include="DriversUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DriversUpdate.Designer.cs">
+      <DependentUpon>DriversUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="ColorAddition.resx">
       <DependentUpon>ColorAddition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DriversUpdate.resx">
+      <DependentUpon>DriversUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
