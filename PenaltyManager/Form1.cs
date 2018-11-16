@@ -25,11 +25,13 @@ namespace PenaltyManager
             init_manufacturers_table();
             init_violation_types_table();
             init_drivers_table();
+            init_insurances_table();
         }
 
         public void RefreshManagementTables()
         {
             refresh_drivers_table();
+            refresh_insurances_table();
         }
 
         public static void ShowError(string message, string title = "Error")
@@ -50,20 +52,9 @@ namespace PenaltyManager
             
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void textBox1_TextChanged(object sender, EventArgs e){}
 
         private void button_add_violation_Click(object sender, EventArgs e)
         {
@@ -156,15 +147,25 @@ namespace PenaltyManager
             db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
         }
 
-        private void grid_car_colors_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void init_insurances_table()
         {
-
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_insurances.Columns.Add("ID", "ID");
+            grid_insurances.Columns.Add("DateTime", "Insurance time");
+            grid_insurances.Columns.Add("IsValid", "Is valid");
+            db.SaveChanges();
+            refresh_insurances_table();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void refresh_insurances_table()
         {
-
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_insurances.Rows.Clear();
+            db.Insurances.ToList().ForEach(e => grid_insurances.Rows.Add(e.Id, e.InsuranceDate, e.IsValid));
         }
+
+        private void grid_car_colors_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e){}
 
         private void button_updateDrivers_Click(object sender, EventArgs e)
         {
@@ -175,7 +176,9 @@ namespace PenaltyManager
 
         private void button_updateInsurances_Click(object sender, EventArgs e)
         {
-
+            InsuranceUpdate insUpdate = new InsuranceUpdate(this);
+            insUpdate.Show();
+            Enabled = false;
         }
         
     }

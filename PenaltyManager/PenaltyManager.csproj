@@ -81,6 +81,12 @@
     <Compile Include="DataModel\Insurance.cs" />
     <Compile Include="DataModel\Manufacturer.cs" />
     <Compile Include="DataModel\Model.cs" />
+    <Compile Include="InsuranceUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsuranceUpdate.Designer.cs">
+      <DependentUpon>InsuranceUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManufacturerUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InsuranceUpdate.resx">
+      <DependentUpon>InsuranceUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManufacturerUpdate.resx">
       <DependentUpon>ManufacturerUpdate.cs</DependentUpon>
