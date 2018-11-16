@@ -134,5 +134,10 @@ namespace PenaltyManager
         {
 
         }
+
+        private void comboBox_violationTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

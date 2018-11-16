@@ -125,5 +125,15 @@ namespace PenaltyManager
             else
                 checkBox_leaveDate.Enabled = true;
         }
+
+        private void InsuranceUpdate_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InsuranceUpdate_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Enabled = true;
+        }
     }
 }

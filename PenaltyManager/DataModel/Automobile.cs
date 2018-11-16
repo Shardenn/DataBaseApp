@@ -23,6 +23,8 @@ namespace PenaltyManager
 
         public int InsuranceValue { get; set; }
 
+        public string Number { get; set; }
+
         public int Model_id { get; set; }
 
         public int Color_id { get; set; }

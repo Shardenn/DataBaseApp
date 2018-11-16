@@ -150,6 +150,8 @@
             this.Controls.Add(this.dateTimePicker);
             this.Name = "InsuranceUpdate";
             this.Text = "InsuranceUpdate";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InsuranceUpdate_FormClosed);
+            this.Load += new System.EventHandler(this.InsuranceUpdate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

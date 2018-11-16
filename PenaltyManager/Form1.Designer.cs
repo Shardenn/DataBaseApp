@@ -76,6 +76,8 @@
             this.colorsTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ColorsTableAdapter();
             this.manufacturersTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ManufacturersTableAdapter();
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.grid_models = new System.Windows.Forms.DataGridView();
+            this.button_updateModels = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -104,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_models)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,7 +116,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(829, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(880, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -147,7 +150,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(829, 382);
+            this.tabControl1.Size = new System.Drawing.Size(880, 433);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -157,7 +160,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(821, 356);
+            this.tabPage1.Size = new System.Drawing.Size(872, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Violations information";
             // 
@@ -184,7 +187,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(821, 356);
+            this.tabPage2.Size = new System.Drawing.Size(872, 407);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Cars and drivers management";
             // 
@@ -192,9 +195,9 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.DarkGray;
             this.panel6.Controls.Add(this.button_updateInsurances);
-            this.panel6.Location = new System.Drawing.Point(592, 300);
+            this.panel6.Location = new System.Drawing.Point(674, 351);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(180, 50);
+            this.panel6.Size = new System.Drawing.Size(190, 50);
             this.panel6.TabIndex = 11;
             // 
             // button_updateInsurances
@@ -211,7 +214,7 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.DarkGray;
             this.panel5.Controls.Add(this.button_updateCars);
-            this.panel5.Location = new System.Drawing.Point(321, 300);
+            this.panel5.Location = new System.Drawing.Point(359, 351);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(180, 50);
             this.panel5.TabIndex = 10;
@@ -224,19 +227,20 @@
             this.button_updateCars.TabIndex = 6;
             this.button_updateCars.Text = "Update automobiles";
             this.button_updateCars.UseVisualStyleBackColor = true;
+            this.button_updateCars.Click += new System.EventHandler(this.button_updateCars_Click);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.DarkGray;
             this.panel4.Controls.Add(this.button_updateDrivers);
-            this.panel4.Location = new System.Drawing.Point(47, 300);
+            this.panel4.Location = new System.Drawing.Point(8, 351);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 50);
+            this.panel4.Size = new System.Drawing.Size(203, 50);
             this.panel4.TabIndex = 9;
             // 
             // button_updateDrivers
             // 
-            this.button_updateDrivers.Location = new System.Drawing.Point(34, 15);
+            this.button_updateDrivers.Location = new System.Drawing.Point(43, 15);
             this.button_updateDrivers.Name = "button_updateDrivers";
             this.button_updateDrivers.Size = new System.Drawing.Size(116, 23);
             this.button_updateDrivers.TabIndex = 6;
@@ -246,16 +250,16 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(551, 18);
+            this.textBox6.Location = new System.Drawing.Point(674, 18);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(262, 20);
+            this.textBox6.Size = new System.Drawing.Size(190, 20);
             this.textBox6.TabIndex = 5;
             this.textBox6.Text = "Insurances";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(280, 18);
+            this.textBox5.Location = new System.Drawing.Point(303, 18);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(265, 20);
             this.textBox5.TabIndex = 4;
@@ -266,18 +270,20 @@
             // 
             this.grid_insurances.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grid_insurances.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_insurances.Location = new System.Drawing.Point(551, 44);
+            this.grid_insurances.Location = new System.Drawing.Point(674, 44);
             this.grid_insurances.Name = "grid_insurances";
-            this.grid_insurances.Size = new System.Drawing.Size(262, 250);
+            this.grid_insurances.RowHeadersVisible = false;
+            this.grid_insurances.Size = new System.Drawing.Size(190, 301);
             this.grid_insurances.TabIndex = 3;
             // 
             // grid_cars
             // 
             this.grid_cars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grid_cars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_cars.Location = new System.Drawing.Point(280, 44);
+            this.grid_cars.Location = new System.Drawing.Point(217, 44);
             this.grid_cars.Name = "grid_cars";
-            this.grid_cars.Size = new System.Drawing.Size(265, 250);
+            this.grid_cars.RowHeadersVisible = false;
+            this.grid_cars.Size = new System.Drawing.Size(451, 299);
             this.grid_cars.TabIndex = 2;
             // 
             // grid_drivers
@@ -286,14 +292,15 @@
             this.grid_drivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_drivers.Location = new System.Drawing.Point(8, 44);
             this.grid_drivers.Name = "grid_drivers";
-            this.grid_drivers.Size = new System.Drawing.Size(266, 250);
+            this.grid_drivers.RowHeadersVisible = false;
+            this.grid_drivers.Size = new System.Drawing.Size(203, 299);
             this.grid_drivers.TabIndex = 1;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(8, 18);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(266, 20);
+            this.textBox2.Size = new System.Drawing.Size(203, 20);
             this.textBox2.TabIndex = 0;
             this.textBox2.Text = "Drivers";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -301,6 +308,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage3.Controls.Add(this.grid_models);
             this.tabPage3.Controls.Add(this.grid_car_manufacturers);
             this.tabPage3.Controls.Add(this.grid_car_colors);
             this.tabPage3.Controls.Add(this.grid_violation_types);
@@ -312,7 +320,7 @@
             this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(821, 356);
+            this.tabPage3.Size = new System.Drawing.Size(872, 407);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Utilities";
             // 
@@ -322,9 +330,10 @@
             this.grid_car_manufacturers.AllowUserToDeleteRows = false;
             this.grid_car_manufacturers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grid_car_manufacturers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_car_manufacturers.Location = new System.Drawing.Point(551, 43);
+            this.grid_car_manufacturers.Location = new System.Drawing.Point(548, 44);
             this.grid_car_manufacturers.Name = "grid_car_manufacturers";
-            this.grid_car_manufacturers.Size = new System.Drawing.Size(265, 251);
+            this.grid_car_manufacturers.RowHeadersVisible = false;
+            this.grid_car_manufacturers.Size = new System.Drawing.Size(316, 154);
             this.grid_car_manufacturers.TabIndex = 16;
             // 
             // grid_car_colors
@@ -333,10 +342,11 @@
             this.grid_car_colors.AllowUserToDeleteRows = false;
             this.grid_car_colors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grid_car_colors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_car_colors.Location = new System.Drawing.Point(280, 44);
+            this.grid_car_colors.Location = new System.Drawing.Point(320, 44);
             this.grid_car_colors.Name = "grid_car_colors";
             this.grid_car_colors.ReadOnly = true;
-            this.grid_car_colors.Size = new System.Drawing.Size(265, 250);
+            this.grid_car_colors.RowHeadersVisible = false;
+            this.grid_car_colors.Size = new System.Drawing.Size(222, 295);
             this.grid_car_colors.TabIndex = 15;
             this.grid_car_colors.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_car_colors_CellContentClick);
             // 
@@ -349,21 +359,22 @@
             this.grid_violation_types.Location = new System.Drawing.Point(9, 44);
             this.grid_violation_types.Name = "grid_violation_types";
             this.grid_violation_types.ReadOnly = true;
-            this.grid_violation_types.Size = new System.Drawing.Size(265, 250);
+            this.grid_violation_types.RowHeadersVisible = false;
+            this.grid_violation_types.Size = new System.Drawing.Size(305, 295);
             this.grid_violation_types.TabIndex = 14;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkGray;
             this.panel3.Controls.Add(this.button_add_color);
-            this.panel3.Location = new System.Drawing.Point(318, 300);
+            this.panel3.Location = new System.Drawing.Point(320, 345);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(179, 48);
+            this.panel3.Size = new System.Drawing.Size(222, 50);
             this.panel3.TabIndex = 13;
             // 
             // button_add_color
             // 
-            this.button_add_color.Location = new System.Drawing.Point(31, 13);
+            this.button_add_color.Location = new System.Drawing.Point(50, 13);
             this.button_add_color.Name = "button_add_color";
             this.button_add_color.Size = new System.Drawing.Size(116, 23);
             this.button_add_color.TabIndex = 7;
@@ -374,19 +385,20 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
+            this.panel2.Controls.Add(this.button_updateModels);
             this.panel2.Controls.Add(this.button_add_manufacturer);
-            this.panel2.Location = new System.Drawing.Point(590, 300);
+            this.panel2.Location = new System.Drawing.Point(548, 345);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(179, 48);
+            this.panel2.Size = new System.Drawing.Size(315, 50);
             this.panel2.TabIndex = 12;
             // 
             // button_add_manufacturer
             // 
-            this.button_add_manufacturer.Location = new System.Drawing.Point(33, 13);
+            this.button_add_manufacturer.Location = new System.Drawing.Point(21, 13);
             this.button_add_manufacturer.Name = "button_add_manufacturer";
-            this.button_add_manufacturer.Size = new System.Drawing.Size(116, 23);
+            this.button_add_manufacturer.Size = new System.Drawing.Size(123, 23);
             this.button_add_manufacturer.TabIndex = 7;
-            this.button_add_manufacturer.Text = "Update table";
+            this.button_add_manufacturer.Text = "Update manufacturers";
             this.button_add_manufacturer.UseVisualStyleBackColor = true;
             this.button_add_manufacturer.Click += new System.EventHandler(this.button_add_manufacturer_Click);
             // 
@@ -394,14 +406,14 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
             this.panel1.Controls.Add(this.button_add_violation);
-            this.panel1.Location = new System.Drawing.Point(40, 300);
+            this.panel1.Location = new System.Drawing.Point(9, 345);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 50);
+            this.panel1.Size = new System.Drawing.Size(305, 50);
             this.panel1.TabIndex = 10;
             // 
             // button_add_violation
             // 
-            this.button_add_violation.Location = new System.Drawing.Point(34, 13);
+            this.button_add_violation.Location = new System.Drawing.Point(76, 13);
             this.button_add_violation.Name = "button_add_violation";
             this.button_add_violation.Size = new System.Drawing.Size(116, 23);
             this.button_add_violation.TabIndex = 7;
@@ -411,27 +423,27 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(280, 17);
+            this.textBox4.Location = new System.Drawing.Point(320, 17);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(265, 20);
+            this.textBox4.Size = new System.Drawing.Size(222, 20);
             this.textBox4.TabIndex = 4;
             this.textBox4.Text = "Car colors";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(551, 17);
+            this.textBox3.Location = new System.Drawing.Point(548, 17);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(265, 20);
+            this.textBox3.Size = new System.Drawing.Size(316, 20);
             this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "Car manufacturers";
+            this.textBox3.Text = "Car manufacturers and models";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(8, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(266, 20);
+            this.textBox1.Size = new System.Drawing.Size(306, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Violation types";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -504,11 +516,30 @@
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
             // 
+            // grid_models
+            // 
+            this.grid_models.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_models.Location = new System.Drawing.Point(548, 204);
+            this.grid_models.Name = "grid_models";
+            this.grid_models.RowHeadersVisible = false;
+            this.grid_models.Size = new System.Drawing.Size(316, 135);
+            this.grid_models.TabIndex = 17;
+            // 
+            // button_updateModels
+            // 
+            this.button_updateModels.Location = new System.Drawing.Point(174, 13);
+            this.button_updateModels.Name = "button_updateModels";
+            this.button_updateModels.Size = new System.Drawing.Size(115, 23);
+            this.button_updateModels.TabIndex = 8;
+            this.button_updateModels.Text = "Update models";
+            this.button_updateModels.UseVisualStyleBackColor = true;
+            this.button_updateModels.Click += new System.EventHandler(this.button_updateModels_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 406);
+            this.ClientSize = new System.Drawing.Size(880, 457);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -546,6 +577,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_models)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,6 +632,8 @@
         private System.Windows.Forms.Button button_updateCars;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button_updateDrivers;
+        private System.Windows.Forms.DataGridView grid_models;
+        private System.Windows.Forms.Button button_updateModels;
     }
 }
 

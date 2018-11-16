@@ -109,5 +109,10 @@ namespace PenaltyManager
             db.Drivers.Remove(foundDriver);
             db.SaveChanges();
         }
+
+        private void DriversUpdate_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Enabled = true;
+        }
     }
 }

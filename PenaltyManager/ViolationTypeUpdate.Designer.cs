@@ -107,6 +107,8 @@
             // 
             // comboBox_violationTypes
             // 
+            this.comboBox_violationTypes.DisplayMember = "Type";
+            this.comboBox_violationTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_violationTypes.FormattingEnabled = true;
             this.comboBox_violationTypes.Location = new System.Drawing.Point(112, 35);
             this.comboBox_violationTypes.Name = "comboBox_violationTypes";
@@ -114,6 +116,7 @@
             this.comboBox_violationTypes.TabIndex = 7;
             this.comboBox_violationTypes.ValueMember = "Type";
             this.comboBox_violationTypes.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox_violationTypes_DrawItem);
+            this.comboBox_violationTypes.SelectedIndexChanged += new System.EventHandler(this.comboBox_violationTypes_SelectedIndexChanged);
             // 
             // roadPenaltiesDataSet
             // 

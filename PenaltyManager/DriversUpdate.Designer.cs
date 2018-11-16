@@ -132,6 +132,7 @@
             this.Controls.Add(this.label1);
             this.Name = "DriversUpdate";
             this.Text = "DriversUpdate";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DriversUpdate_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
