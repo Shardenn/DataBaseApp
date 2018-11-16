@@ -103,6 +103,7 @@ namespace PenaltyManager
             // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Driver' table. You can move, or remove it, as needed.
             this.driverTableAdapter.Fill(this.roadPenaltiesDataSet.Driver);
             fill_violation_combobox();
+            comboBox_violationType.SelectedIndex = comboBox_violationType.Items.Count - 1;
             update_driver_info();
             update_car_info();
             update_fine_info();

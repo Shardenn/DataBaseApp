@@ -286,5 +286,19 @@ namespace PenaltyManager
             violForm.Show();
             Enabled = false;
         }
+
+        private void button_editViolation_Click(object sender, EventArgs e)
+        {
+            EditViolationNew violEdit = new EditViolationNew(this);
+            violEdit.Show();
+            Enabled = false;
+        }
+
+        private void button_removeViolation_Click(object sender, EventArgs e)
+        {
+            RemoveViolation violForm = new RemoveViolation(this);
+            violForm.Show();
+            Enabled = false;
+        }
     }
 }

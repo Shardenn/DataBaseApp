@@ -35,6 +35,10 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.button_removeViolation = new System.Windows.Forms.Button();
+            this.button_editViolation = new System.Windows.Forms.Button();
+            this.button_addViolation = new System.Windows.Forms.Button();
             this.grid_violations = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -78,13 +82,10 @@
             this.colorsTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ColorsTableAdapter();
             this.manufacturersTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ManufacturersTableAdapter();
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.button_addViolation = new System.Windows.Forms.Button();
-            this.button_editViolation = new System.Windows.Forms.Button();
-            this.button_removeViolation = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_violations)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -111,7 +112,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).BeginInit();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -169,6 +169,47 @@
             this.tabPage1.Size = new System.Drawing.Size(872, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Violations information";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DarkGray;
+            this.panel7.Controls.Add(this.button_removeViolation);
+            this.panel7.Controls.Add(this.button_editViolation);
+            this.panel7.Controls.Add(this.button_addViolation);
+            this.panel7.Location = new System.Drawing.Point(3, 360);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(866, 44);
+            this.panel7.TabIndex = 1;
+            // 
+            // button_removeViolation
+            // 
+            this.button_removeViolation.Location = new System.Drawing.Point(568, 3);
+            this.button_removeViolation.Name = "button_removeViolation";
+            this.button_removeViolation.Size = new System.Drawing.Size(174, 36);
+            this.button_removeViolation.TabIndex = 2;
+            this.button_removeViolation.Text = "Remove violation";
+            this.button_removeViolation.UseVisualStyleBackColor = true;
+            this.button_removeViolation.Click += new System.EventHandler(this.button_removeViolation_Click);
+            // 
+            // button_editViolation
+            // 
+            this.button_editViolation.Location = new System.Drawing.Point(318, 3);
+            this.button_editViolation.Name = "button_editViolation";
+            this.button_editViolation.Size = new System.Drawing.Size(223, 36);
+            this.button_editViolation.TabIndex = 1;
+            this.button_editViolation.Text = "Edit violation";
+            this.button_editViolation.UseVisualStyleBackColor = true;
+            this.button_editViolation.Click += new System.EventHandler(this.button_editViolation_Click);
+            // 
+            // button_addViolation
+            // 
+            this.button_addViolation.Location = new System.Drawing.Point(125, 3);
+            this.button_addViolation.Name = "button_addViolation";
+            this.button_addViolation.Size = new System.Drawing.Size(164, 36);
+            this.button_addViolation.TabIndex = 0;
+            this.button_addViolation.Text = "Add violation";
+            this.button_addViolation.UseVisualStyleBackColor = true;
+            this.button_addViolation.Click += new System.EventHandler(this.button_addViolation_Click);
             // 
             // grid_violations
             // 
@@ -557,45 +598,6 @@
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.DarkGray;
-            this.panel7.Controls.Add(this.button_removeViolation);
-            this.panel7.Controls.Add(this.button_editViolation);
-            this.panel7.Controls.Add(this.button_addViolation);
-            this.panel7.Location = new System.Drawing.Point(3, 360);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(866, 44);
-            this.panel7.TabIndex = 1;
-            // 
-            // button_addViolation
-            // 
-            this.button_addViolation.Location = new System.Drawing.Point(125, 3);
-            this.button_addViolation.Name = "button_addViolation";
-            this.button_addViolation.Size = new System.Drawing.Size(164, 36);
-            this.button_addViolation.TabIndex = 0;
-            this.button_addViolation.Text = "Add violation";
-            this.button_addViolation.UseVisualStyleBackColor = true;
-            this.button_addViolation.Click += new System.EventHandler(this.button_addViolation_Click);
-            // 
-            // button_editViolation
-            // 
-            this.button_editViolation.Location = new System.Drawing.Point(318, 3);
-            this.button_editViolation.Name = "button_editViolation";
-            this.button_editViolation.Size = new System.Drawing.Size(223, 36);
-            this.button_editViolation.TabIndex = 1;
-            this.button_editViolation.Text = "Edit violation";
-            this.button_editViolation.UseVisualStyleBackColor = true;
-            // 
-            // button_removeViolation
-            // 
-            this.button_removeViolation.Location = new System.Drawing.Point(568, 3);
-            this.button_removeViolation.Name = "button_removeViolation";
-            this.button_removeViolation.Size = new System.Drawing.Size(174, 36);
-            this.button_removeViolation.TabIndex = 2;
-            this.button_removeViolation.Text = "Remove violation";
-            this.button_removeViolation.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -611,6 +613,7 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_violations)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -639,7 +642,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).EndInit();
-            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
