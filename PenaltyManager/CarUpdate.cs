@@ -22,6 +22,8 @@ namespace PenaltyManager
 
         private void CarUpdate_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Models' table. You can move, or remove it, as needed.
+            this.modelsTableAdapter.Fill(this.roadPenaltiesDataSet.Models);
             // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Insurance' table. You can move, or remove it, as needed.
             this.insuranceTableAdapter.Fill(this.roadPenaltiesDataSet.Insurance);
             // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Colors' table. You can move, or remove it, as needed.
@@ -50,77 +52,70 @@ namespace PenaltyManager
             parentForm.Enabled = true;
             MainWindow main = (MainWindow)parentForm;
             if (main != null)
-                main.RefreshManagementTables();
+                main.RefreshAllTables();
             Close();
         }
 
         private void button_addEdit_Click(object sender, EventArgs e)
         {
-            var idText = textBox_id.Text;
+            string idText = textBox_id.Text,
+                numberText = textBox_carNumber.Text,
+                insValueText = textBox_insValue.Text;
+
+            int insId = (int)comboBox_assignedIns.SelectedValue, 
+                insValue,
+                modelId = (int)comboBox_model.SelectedValue, 
+                colorId = (int)comboBox_color.SelectedValue;
+
+            if(!int.TryParse(insValueText, out insValue))
+            {
+                MainWindow.ShowError("Invalid insurance value");
+                return;
+            }
             if(idText == "")
             {
-                //try
-                //{
-                    AddCar(textBox_carNumber.Text,
-                        int.Parse(comboBox_assignedIns.SelectedValue.ToString()),
-                        int.Parse(textBox_insValue.Text),
-                        int.Parse(comboBox_manufacturer.SelectedValue.ToString()),
-                        int.Parse(comboBox_color.SelectedValue.ToString()));
-                    /*
-                }
-                catch (Exception exc)
-                {
-                    MainWindow.ShowError(exc.ToString());
-                    return;
-                }*/
+                AddCar(numberText, insId, insValue, modelId, colorId);
             }
             else
             {
-                int id = int.Parse(idText);
-                EditCar(id,
-                        textBox_carNumber.Text,
-                        int.Parse(comboBox_assignedIns.SelectedValue.ToString()),
-                        int.Parse(textBox_insValue.Text),
-                        int.Parse(comboBox_manufacturer.SelectedValue.ToString()),
-                        int.Parse(comboBox_color.SelectedValue.ToString()));
+                int id;
+                if(!int.TryParse(idText, out id))
+                {
+                    MainWindow.ShowError("Invalid ID input");
+                    return;
+                }
+                EditCar(id, numberText, insId, insValue, modelId, colorId);
             }
 
             parentForm.Enabled = true;
             MainWindow main = (MainWindow)parentForm;
             if (main != null)
-                main.RefreshManagementTables();
+                main.RefreshAllTables();
             Close();
         }
 
-        private void AddCar(string number, int insId, int insValue, int manufacturerlId, int colorId)
+        private void AddCar(string number, int insId, int insValue, 
+            int modelId, int colorId)
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             Automobile car = new Automobile();
 
             car.Number = number;
             car.Insurance_id = insId;
-            Insurance ins = db.Insurances.Find(insId);
-            car.Insurance = ins;
-
             car.InsuranceValue = insValue;
-
-            Model model = new Model { Model1 = "NewName" };
-            Manufacturer man = db.Manufacturers.Find(manufacturerlId);
-            model.Manufacturer = man;
-            Model inserted = db.Models.Add(model);
-            db.SaveChanges();
-            car.Model_id = inserted.Id;
-            car.Model = inserted;
-            
+            car.Model_id = modelId;
             car.Color_id = colorId;
-            Color color = db.Colors.Find(colorId);
-            car.Color = color;
+
+            car.Insurance = db.Insurances.Find(insId);
+            car.Model = db.Models.Find(modelId);
+            car.Color = db.Colors.Find(colorId);
 
             db.Automobiles.Add(car);
             db.SaveChanges();
         }
 
-        private void EditCar(int id, string number, int insId, int insValue, int manufacturerId, int colorId)
+        private void EditCar(int id, string number, int insId, int insValue, 
+            int modelId, int colorId)
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             Automobile car = db.Automobiles.Find(id);
@@ -129,11 +124,16 @@ namespace PenaltyManager
                 MainWindow.ShowError("No car has such a key");
                 return;
             }
+            car.Number = number;
             car.Insurance_id = insId;
             car.InsuranceValue = insValue;
-            car.Model_id = manufacturerId;
+            car.Model_id = modelId;
             car.Color_id = colorId;
-            car.Number = number;
+
+            car.Insurance = db.Insurances.Find(insId);
+            car.Model = db.Models.Find(modelId);
+            car.Color = db.Colors.Find(colorId);
+
             db.SaveChanges();
         }
 

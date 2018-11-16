@@ -34,7 +34,7 @@ namespace PenaltyManager
 
             RemoveInsurance(id);
             parentForm.Enabled = true;
-            parentForm.RefreshManagementTables();
+            parentForm.RefreshAllTables();
             Close();
         }
 
@@ -60,7 +60,7 @@ namespace PenaltyManager
             }
 
             parentForm.Enabled = true;
-            parentForm.RefreshManagementTables();
+            parentForm.RefreshAllTables();
             Close();
         }
 

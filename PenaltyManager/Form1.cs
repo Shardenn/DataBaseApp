@@ -22,21 +22,22 @@ namespace PenaltyManager
             init_drivers_table();
             init_insurances_table();
             init_cars_table();
+
+            init_violations_table();
         }
 
-        public void RefreshUtilityTables()
+        public void RefreshAllTables()
         {
             refresh_violation_types_table();
             refresh_colors_table();
             refresh_manufacturers_table();
             refresh_models_table();
-        }
 
-        public void RefreshManagementTables()
-        {
             refresh_drivers_table();
             refresh_insurances_table();
             refresh_cars_table();
+
+            refresh_violations_table();
         }
 
         public static void ShowError(string message, string title = "Error")
@@ -52,8 +53,8 @@ namespace PenaltyManager
         private void Form1_Load(object sender, EventArgs e)
         {
             InitAllTables();
-            RefreshUtilityTables();
-            RefreshManagementTables();
+            RefreshAllTables();
+            RefreshAllTables();
             
         }
 
@@ -190,6 +191,7 @@ namespace PenaltyManager
             grid_cars.Columns.Add("InsID", "Insurance ID");
             grid_cars.Columns.Add("InsValue", "Insurance value");
             grid_cars.Columns.Add("Manufacturer", "Manufacturer");
+            grid_cars.Columns.Add("Model", "Model");
             grid_cars.Columns.Add("Color", "Color");
             refresh_cars_table();
         }
@@ -199,7 +201,39 @@ namespace PenaltyManager
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_cars.Rows.Clear();
             db.Automobiles.ToList().ForEach(e =>
-                grid_cars.Rows.Add(e.Id, e.Number, e.Insurance_id, e.InsuranceValue, e.Model, e.Color));
+                grid_cars.Rows.Add(e.Id, e.Number, e.Insurance_id, e.InsuranceValue, e.Model.Manufacturer.ManufacturerName,
+                e.Model.Model1, e.Color.ColorName));
+        }
+
+        private void init_violations_table()
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_violations.Columns.Add("ID", "ID");
+            grid_violations.Columns.Add("CarID", "Car ID");
+            grid_violations.Columns.Add("CarManufacturer", "Car manufacturer");
+            grid_violations.Columns.Add("CarModel", "Car model");
+            grid_violations.Columns.Add("DriverID", "Driver ID");
+            grid_violations.Columns.Add("DriverName", "Driver Name");
+            grid_violations.Columns.Add("ViolationType", "Violation Type");
+            grid_violations.Columns.Add("Fine", "Fine");
+            refresh_violations_table();
+        }
+
+        private void refresh_violations_table()
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_violations.Rows.Clear();
+            db.Violations.ToList().ForEach(e =>
+            {
+                grid_violations.Rows.Add(e.Id,
+                    e.Automobile_id,
+                    e.Automobile.Model.Manufacturer.ManufacturerName,
+                    e.Automobile.Model.Model1,
+                    e.Driver_id,
+                    e.Driver.FullName,
+                    e.ViolationType.Type,
+                    e.ViolationType.Fine);
+            });
         }
 
         private void grid_car_colors_CellContentClick(object sender, DataGridViewCellEventArgs e){}
@@ -243,6 +277,13 @@ namespace PenaltyManager
         {
             ModelsUpdate modelsForm = new ModelsUpdate(this);
             modelsForm.Show();
+            Enabled = false;
+        }
+
+        private void button_addViolation_Click(object sender, EventArgs e)
+        {
+            AddViolation violForm = new AddViolation(this);
+            violForm.Show();
             Enabled = false;
         }
     }
