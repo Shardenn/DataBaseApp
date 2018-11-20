@@ -50,8 +50,21 @@ namespace PenaltyManager
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        private void RemoveAdminButtons()
+        {
+            panel7.Visible = false;
+            panel4.Visible = false;
+            panel5.Visible = false;
+            panel6.Visible = false;
+
+            tabControl1.TabPages.RemoveAt(2);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Environment.UserName == "InsufficientUser") //InsufficientUser //Andrei
+                RemoveAdminButtons();
+
             InitAllTables();
             RefreshAllTables();
             RefreshAllTables();

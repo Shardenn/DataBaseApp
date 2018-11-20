@@ -148,6 +148,7 @@ namespace PenaltyManager
             }
             db.Automobiles.Remove(car);
             db.SaveChanges();
+            
         }
 
         private void CarUpdate_FormClosed(object sender, FormClosedEventArgs e)
