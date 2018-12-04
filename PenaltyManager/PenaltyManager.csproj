@@ -73,6 +73,12 @@
     <Compile Include="ColorAddition.Designer.cs">
       <DependentUpon>ColorAddition.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColorUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColorUpdate.Designer.cs">
+      <DependentUpon>ColorUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\Automobile.cs" />
     <Compile Include="DataModel\Color.cs" />
     <Compile Include="C__MigrationHistory.cs" />
@@ -105,11 +111,23 @@
     <Compile Include="InsuranceUpdate.Designer.cs">
       <DependentUpon>InsuranceUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManufacturerAddition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManufacturerAddition.Designer.cs">
+      <DependentUpon>ManufacturerAddition.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManufacturerUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ManufacturerUpdate.Designer.cs">
       <DependentUpon>ManufacturerUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsAddition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelsAddition.Designer.cs">
+      <DependentUpon>ModelsAddition.cs</DependentUpon>
     </Compile>
     <Compile Include="ModelsUpdate.cs">
       <SubType>Form</SubType>
@@ -134,6 +152,12 @@
     <Compile Include="DataModel\User.cs" />
     <Compile Include="DataModel\Violation.cs" />
     <Compile Include="DataModel\ViolationType.cs" />
+    <Compile Include="ViolationTypeAddition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViolationTypeAddition.Designer.cs">
+      <DependentUpon>ViolationTypeAddition.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViolationTypeUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +173,9 @@
     <EmbeddedResource Include="ColorAddition.resx">
       <DependentUpon>ColorAddition.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ColorUpdate.resx">
+      <DependentUpon>ColorUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DriversUpdate.resx">
       <DependentUpon>DriversUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,8 +188,14 @@
     <EmbeddedResource Include="InsuranceUpdate.resx">
       <DependentUpon>InsuranceUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManufacturerAddition.resx">
+      <DependentUpon>ManufacturerAddition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManufacturerUpdate.resx">
       <DependentUpon>ManufacturerUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelsAddition.resx">
+      <DependentUpon>ModelsAddition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModelsUpdate.resx">
       <DependentUpon>ModelsUpdate.cs</DependentUpon>
@@ -178,6 +211,9 @@
     </Compile>
     <EmbeddedResource Include="RemoveViolation.resx">
       <DependentUpon>RemoveViolation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViolationTypeAddition.resx">
+      <DependentUpon>ViolationTypeAddition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViolationTypeUpdate.resx">
       <DependentUpon>ViolationTypeUpdate.cs</DependentUpon>

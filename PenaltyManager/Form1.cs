@@ -75,6 +75,8 @@ namespace PenaltyManager
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e){}
         private void textBox1_TextChanged(object sender, EventArgs e){}
 
+
+        // it is a violation type update actually!
         private void button_add_violation_Click(object sender, EventArgs e)
         {
             ViolationTypeUpdate violUpdateTable = new ViolationTypeUpdate(this);
@@ -82,13 +84,51 @@ namespace PenaltyManager
             Enabled = false;
         }
 
-        private void button_add_color_Click(object sender, EventArgs e)
+        private void button_addViolationType_Click(object sender, EventArgs e)
         {
-            ManufacturerAddition manufacturerAdditionForm = new ManufacturerAddition(this);
-            manufacturerAdditionForm.Show();
+            ViolationTypeAddition form = new ViolationTypeAddition(this);
+            form.Show();
             Enabled = false;
         }
 
+        private void button_addColor_Click(object sender, EventArgs e)
+        {
+            ColorAddition form = new ColorAddition(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_updateColor_Click(object sender, EventArgs e)
+        {
+            ColorUpdate form = new ColorUpdate(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_removeColor_Click(object sender, EventArgs e)
+        {
+            string colorName = grid_car_colors.SelectedCells[0].Value.ToString();
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Color color = db.Colors.Where(f => f.ColorName == colorName).FirstOrDefault();
+            if(color == null)
+            {
+                ShowError("Could not find a color to delete");
+                return;
+            }
+
+            try
+            {
+                db.Colors.Remove(color);
+                db.SaveChanges();
+                RefreshAllTables();
+            }
+            catch(Exception exc)
+            {
+                ShowWarning("There are other tables referencing to that entity. Delete them first.");
+            }
+        }
+
+        // it is a color update actually 
         private void button_add_manufacturer_Click(object sender, EventArgs e)
         {
             ManufacturerUpdate manufacturerUpdate = new ManufacturerUpdate(this);
@@ -96,10 +136,48 @@ namespace PenaltyManager
             Enabled = false;
         }
 
+
+        private void button_manufacturerAdd_Click(object sender, EventArgs e)
+        {
+            ManufacturerAddition form = new ManufacturerAddition(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_manufacturereUpdate_Click(object sender, EventArgs e)
+        {
+            ManufacturerUpdate form = new ManufacturerUpdate(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_manufacturerRemove_Click(object sender, EventArgs e)
+        {
+            string manName = grid_car_manufacturers.SelectedCells[0].Value.ToString();
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Manufacturer man = db.Manufacturers.Where(f => f.ManufacturerName== manName).FirstOrDefault();
+            if (man == null)
+            {
+                ShowError("Could not find a manufacturer to delete");
+                return;
+            }
+
+            try
+            {
+                db.Manufacturers.Remove(man);
+                db.SaveChanges();
+                RefreshAllTables();
+            }
+            catch(Exception exc)
+            {
+                ShowWarning("There are other tables referencing to that entity. Delete them first.");
+            }
+        }
+
         private void init_violation_types_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_violation_types.Columns.Add("ID", "Violation type");
+            grid_violation_types.Columns.Add("ViolationType", "Violation type");
             grid_violation_types.Columns.Add("Fine", "Fine");
             refresh_violation_types_table();
         }
@@ -111,10 +189,11 @@ namespace PenaltyManager
             db.ViolationTypes.ToList().ForEach(e => grid_violation_types.Rows.Add(e.Type, e.Fine));
         }
 
+
+
         private void init_colors_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_car_colors.Columns.Add("ID", "Color ID");
             grid_car_colors.Columns.Add("ColorName", "Color Name");
             refresh_colors_table();
         }
@@ -123,14 +202,13 @@ namespace PenaltyManager
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_car_colors.Rows.Clear();
-            db.Colors.ToList().ForEach(e => grid_car_colors.Rows.Add(e.Id, e.ColorName));
+            db.Colors.ToList().ForEach(e => grid_car_colors.Rows.Add(e.ColorName));
         }
 
         private void init_manufacturers_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_car_manufacturers.Columns.Add("ID", "Manufacturers ID");
-            grid_car_manufacturers.Columns.Add("ColorName", "Manufacturer Name");
+            grid_car_manufacturers.Columns.Add("ManufacturerName", "Manufacturer Name");
             refresh_manufacturers_table();
         }
 
@@ -138,13 +216,12 @@ namespace PenaltyManager
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_car_manufacturers.Rows.Clear();
-            db.Manufacturers.ToList().ForEach(e => grid_car_manufacturers.Rows.Add(e.Id, e.ManufacturerName));
+            db.Manufacturers.ToList().ForEach(e => grid_car_manufacturers.Rows.Add(e.ManufacturerName));
         }
 
         private void init_models_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_models.Columns.Add("ID", "ID");
             grid_models.Columns.Add("Manufacturer", "Manufacturer");
             grid_models.Columns.Add("ModelName", "Model name");
             refresh_models_table();
@@ -154,7 +231,7 @@ namespace PenaltyManager
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_models.Rows.Clear();
-            db.Models.ToList().ForEach(e => grid_models.Rows.Add(e.Id, e.Manufacturer.ManufacturerName, e.Model1));
+            db.Models.ToList().ForEach(e => grid_models.Rows.Add(e.Manufacturer.ManufacturerName, e.Model1));
         }
 
         private void button_remove_violation_Click(object sender, EventArgs e)
@@ -165,7 +242,6 @@ namespace PenaltyManager
         private void init_drivers_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_drivers.Columns.Add("ID", "ID");
             grid_drivers.Columns.Add("Name", "Full name");
             grid_drivers.Columns.Add("License", "Driver's license number");
             //db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
@@ -176,13 +252,12 @@ namespace PenaltyManager
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_drivers.Rows.Clear();
-            db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
+            db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.FullName, e.License));
         }
 
         private void init_insurances_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_insurances.Columns.Add("ID", "ID");
             grid_insurances.Columns.Add("DateTime", "Insurance time");
             grid_insurances.Columns.Add("IsValid", "Is valid");
             db.SaveChanges();
@@ -193,15 +268,13 @@ namespace PenaltyManager
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_insurances.Rows.Clear();
-            db.Insurances.ToList().ForEach(e => grid_insurances.Rows.Add(e.Id, e.InsuranceDate, e.IsValid));
+            db.Insurances.ToList().ForEach(e => grid_insurances.Rows.Add(e.InsuranceDate, e.IsValid));
         }
 
         private void init_cars_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_cars.Columns.Add("ID", "ID");
             grid_cars.Columns.Add("Number", "Car number");
-            grid_cars.Columns.Add("InsID", "Insurance ID");
             grid_cars.Columns.Add("InsValue", "Insurance value");
             grid_cars.Columns.Add("Manufacturer", "Manufacturer");
             grid_cars.Columns.Add("Model", "Model");
@@ -214,18 +287,16 @@ namespace PenaltyManager
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_cars.Rows.Clear();
             db.Automobiles.ToList().ForEach(e =>
-                grid_cars.Rows.Add(e.Id, e.Number, e.Insurance_id, e.InsuranceValue, e.Model.Manufacturer.ManufacturerName,
+                grid_cars.Rows.Add(e.Number, e.InsuranceValue, e.Model.Manufacturer.ManufacturerName,
                 e.Model.Model1, e.Color.ColorName));
         }
 
         private void init_violations_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_violations.Columns.Add("ID", "ID");
-            grid_violations.Columns.Add("CarID", "Car ID");
             grid_violations.Columns.Add("CarManufacturer", "Car manufacturer");
             grid_violations.Columns.Add("CarModel", "Car model");
-            grid_violations.Columns.Add("DriverID", "Driver ID");
+            grid_violations.Columns.Add("CarColor", "Car color");
             grid_violations.Columns.Add("DriverName", "Driver Name");
             grid_violations.Columns.Add("ViolationType", "Violation Type");
             grid_violations.Columns.Add("Fine", "Fine");
@@ -238,11 +309,10 @@ namespace PenaltyManager
             grid_violations.Rows.Clear();
             db.Violations.ToList().ForEach(e =>
             {
-                grid_violations.Rows.Add(e.Id,
-                    e.Automobile_id,
+                grid_violations.Rows.Add(
                     e.Automobile.Model.Manufacturer.ManufacturerName,
                     e.Automobile.Model.Model1,
-                    e.Driver_id,
+                    e.Automobile.Color.ColorName,
                     e.Driver.FullName,
                     e.ViolationType.Type,
                     e.ViolationType.Fine);
@@ -312,6 +382,83 @@ namespace PenaltyManager
             RemoveViolation violForm = new RemoveViolation(this);
             violForm.Show();
             Enabled = false;
+        }
+
+        private void button_removeViolationType_Click(object sender, EventArgs e)
+        {
+            string violationName = grid_violation_types.SelectedCells[0].Value.ToString();
+            if(violationName == "")
+            {
+                ShowError("No violation selected for removal");
+                return;
+            }
+
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            ViolationType type = db.ViolationTypes.Where(f => f.Type == violationName).FirstOrDefault();
+
+            if(type == null)
+            {
+                ShowError("No violation found for removal");
+                return;
+            }
+            try
+            {
+                db.ViolationTypes.Remove(type);
+                db.SaveChanges();
+                RefreshAllTables();
+            }
+            catch(Exception exc)
+            {
+                ShowWarning("There are other tables referencing to that entity. Delete them first.");
+            }
+        }
+
+        private void button_modelAddition_Click(object sender, EventArgs e)
+        {
+            ModelsAddition form = new ModelsAddition(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_modelsRemoval_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = grid_models.SelectedCells[0].RowIndex;
+
+            string manufacturer = grid_models.Rows[selectedIndex].Cells[0].Value.ToString();
+            string model = grid_models.Rows[selectedIndex].Cells[1].Value.ToString();
+
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Manufacturer foundMan = db.Manufacturers.Where(f => f.ManufacturerName == manufacturer).FirstOrDefault();
+            if(foundMan == null)
+            {
+                ShowError("Could not find such a manufacturer");
+                return;
+            }
+
+            var foundMans = db.Manufacturers.Where(f => f.ManufacturerName == manufacturer);
+            Model foundModel = null;
+            foreach (var man in foundMans)
+            {
+                foundModel = man.Models.Where(f => f.Model1 == model).FirstOrDefault();
+                if (foundModel == null)
+                {
+                    ShowError("Could not find a model to delete");
+                    continue;
+                }
+                break;
+            }
+
+            try
+            {
+                db.Models.Remove(foundModel);
+                db.SaveChanges();
+                RefreshAllTables();
+                return;
+            }
+            catch(Exception exc)
+            {
+                ShowWarning("There are other tables referencing to that entity. Delete them first.");
+            }
         }
     }
 }

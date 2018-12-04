@@ -38,7 +38,7 @@ namespace PenaltyManager
         // remove button
         private void button_editRemove_Click(object sender, EventArgs e)
         {
-            var idText = textBox_id.Text;
+            var idText = textBox_oldName.Text;
             var colorName = textBox_input.Text;
             
             int id;
@@ -68,29 +68,20 @@ namespace PenaltyManager
 
         }
 
-        // add/edit button
+        // update button
         private void button_add_Click(object sender, EventArgs e)
         {
-            var manufacturerName = textBox_input.Text;
-            if (manufacturerName == "")
+            string oldName = textBox_oldName.Text;
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Manufacturer foundMan = db.Manufacturers.Where(f => f.ManufacturerName == oldName).FirstOrDefault();
+            if(foundMan == null)
             {
-                MainWindow.ShowError("Provide new manufacturer name", "Error");
+                MainWindow.ShowError("Could not find the manufacturer with name " + oldName);
                 return;
             }
 
-            var idText = textBox_id.Text;
-            int id;
-            if (idText != "")
-            {
-                if (!Int32.TryParse(idText, out id))
-                {
-                    MainWindow.ShowError("Wromg ID input");
-                    return;
-                }
-                EditManufacturer(id, manufacturerName);
-            }
-            else
-                AddManufacturer(manufacturerName);
+            foundMan.ManufacturerName = textBox_newName.Text;
+            db.SaveChanges();
 
             parentForm.Enabled = true;
             MainWindow main = (MainWindow)parentForm;

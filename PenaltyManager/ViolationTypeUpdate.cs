@@ -28,58 +28,31 @@ namespace PenaltyManager
         // remove/edit
         private void button_remove_Click(object sender, EventArgs e)
         {
-            var nameInput = comboBox_violationTypes.Text;
-            var fineInput = textBox_fine.Text;
-
-            if (nameInput == "")
-            {
-                MainWindow.ShowError("Violation type is empty");
-                return;
-            }
-
-            if (fineInput == "")
-            {
-                RemoveViolationType(nameInput);
-            }
-            else
-            {
-                int fine;
-                if (!Int32.TryParse(fineInput, out fine))
-                {
-                    MainWindow.ShowError("Wrong fine input");
-                    return;
-                }
-
-                EditViolationType(nameInput, fine);
-            }
-
-            parentForm.Enabled = true;
-            MainWindow main = (MainWindow)parentForm;
-            if (main != null)
-                main.RefreshAllTables();
-            Close();
+            
         }
         
-        // add button
+        // update button
         private void button_update_Click(object sender, EventArgs e)
         {
-            var name = textBox_violationType.Text;
-            var fineInput = textBox_fine.Text;
+            string selectedText = comboBox_violationTypes.SelectedItem.ToString();
 
-            if(name == "" || fineInput == "")
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            ViolationType foundViolation = db.ViolationTypes.Where(f => f.Type == selectedText).FirstOrDefault();
+
+            if(foundViolation == null)
             {
-                MainWindow.ShowError("Provide non-empty input");
+                MainWindow.ShowError("Error finding selected violation type.");
                 return;
             }
 
-            int fine;
-            if(!Int32.TryParse(fineInput, out fine))
+            string fine = textBox_fine.Text;
+            int newFine;
+            if(int.TryParse(fine, out newFine))
             {
-                MainWindow.ShowError("Wrong fine input");
-                return;
+                foundViolation.Fine = newFine;
             }
-            
-            AddViolationType(name, fine);
+
+            db.SaveChanges();
 
             parentForm.Enabled = true;
             MainWindow main = (MainWindow)parentForm;
@@ -136,6 +109,11 @@ namespace PenaltyManager
         }
 
         private void comboBox_violationTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ViolationTypeUpdate_Load(object sender, EventArgs e)
         {
 
         }

@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace PenaltyManager
 {
-    public partial class ManufacturerAddition : Form // it is really a color addition
+    public partial class ColorAddition : Form // it is really a color addition
     {
         Form parentForm;
-        public ManufacturerAddition(Form parent)
+        public ColorAddition(Form parent)
         {
             InitializeComponent();
             parentForm = parent;
@@ -29,57 +29,19 @@ namespace PenaltyManager
                 return;
             }
 
-            var idText = textBox_id.Text;
-            if(idText != "")
-            {
-                int id;
-                if(!Int32.TryParse(idText, out id))
-                {
-                    MainWindow.ShowError("Provide valid input");
-                    return;
-                }
-                EditColor(id, colorName);
-            }
-            else
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Color foundColor = db.Colors.Where(f => f.ColorName == colorName).FirstOrDefault();
+            if (foundColor == null)
                 AddColor(colorName);
-
-            parentForm.Enabled = true;
+            else
+                MainWindow.ShowError("Such a color already exists.");
 
             MainWindow main = (MainWindow)parentForm;
             if(main != null)
                 main.RefreshAllTables();
             Close();
         }
-
-        // remove button
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var idText = textBox_id.Text;
-            var colorName = textBox_input.Text;
-
-            if (idText == "")
-            {
-                MainWindow.ShowError("Provide valid input", "Wrong input");
-                return;
-            }
-
-            int id;
-            if (!Int32.TryParse(idText, out id))
-            {
-                MainWindow.ShowError("Wrong ID input", "Error");
-                return;
-            }
-            
-            RemoveColor(id);
-
-            parentForm.Enabled = true;
-
-            MainWindow main = (MainWindow)parentForm;
-            if (main != null)
-                main.RefreshAllTables();
-            Close();
-        }
-
+        
         private void AddColor(string newColor)
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
@@ -87,39 +49,7 @@ namespace PenaltyManager
             db.Colors.Add(Color);
             db.SaveChanges();
         }
-
-        private void EditColor(int id, string newColor)
-        {
-            RoadPenaltyContext db = new RoadPenaltyContext();
-
-            Color colorToUpdate = db.Colors.Find(id);
-            if(colorToUpdate == null)
-            {
-                MainWindow.ShowError("No color with such a key exists");
-                return;
-            }
-
-            colorToUpdate.ColorName = newColor;
-            db.SaveChanges();
-        }
-
-        private void RemoveColor(int id)
-        {
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            Color foundColor = db.Colors.Find(id);
-            if(foundColor == null)
-            {
-                MainWindow.ShowError("No color with such a key exists");
-                return;
-            }
-            db.Colors.Remove(foundColor);
-            db.SaveChanges();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void ManufacturerAddition_Load(object sender, EventArgs e)
         {
