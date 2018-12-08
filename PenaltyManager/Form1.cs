@@ -460,5 +460,10 @@ namespace PenaltyManager
                 ShowWarning("There are other tables referencing to that entity. Delete them first.");
             }
         }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
