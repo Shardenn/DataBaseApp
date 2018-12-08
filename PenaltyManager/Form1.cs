@@ -6,7 +6,9 @@ namespace PenaltyManager
 {
     public partial class MainWindow : Form
     {
-        
+        private Driver m_foundDriver = null;
+        private Automobile m_foundCar = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,9 +55,6 @@ namespace PenaltyManager
         private void RemoveAdminButtons()
         {
             panel7.Visible = false;
-            panel4.Visible = false;
-            panel5.Visible = false;
-            panel6.Visible = false;
 
             tabControl1.TabPages.RemoveAt(2);
         }
@@ -241,38 +240,43 @@ namespace PenaltyManager
 
         private void init_drivers_table()
         {
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_drivers.Columns.Add("Name", "Full name");
-            grid_drivers.Columns.Add("License", "Driver's license number");
+            //RoadPenaltyContext db = new RoadPenaltyContext();
+            //grid_drivers.Columns.Add("Name", "Full name");
+            //grid_drivers.Columns.Add("License", "Driver's license number");
             //db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
-            refresh_drivers_table();
+            //refresh_drivers_table();
         }
 
         private void refresh_drivers_table()
         {
+            /*
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_drivers.Rows.Clear();
+            //grid_drivers.Rows.Clear();
             db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.FullName, e.License));
+            */
         }
 
         private void init_insurances_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_insurances.Columns.Add("DateTime", "Insurance time");
-            grid_insurances.Columns.Add("IsValid", "Is valid");
+            //grid_insurances.Columns.Add("DateTime", "Insurance time");
+            //grid_insurances.Columns.Add("IsValid", "Is valid");
             db.SaveChanges();
             refresh_insurances_table();
         }
 
         private void refresh_insurances_table()
         {
+            /*
             RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_insurances.Rows.Clear();
+            //grid_insurances.Rows.Clear();
             db.Insurances.ToList().ForEach(e => grid_insurances.Rows.Add(e.InsuranceDate, e.IsValid));
+            */
         }
 
         private void init_cars_table()
         {
+            /*
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_cars.Columns.Add("Number", "Car number");
             grid_cars.Columns.Add("InsValue", "Insurance value");
@@ -280,15 +284,18 @@ namespace PenaltyManager
             grid_cars.Columns.Add("Model", "Model");
             grid_cars.Columns.Add("Color", "Color");
             refresh_cars_table();
+            */
         }
 
         private void refresh_cars_table()
         {
+            /*
             RoadPenaltyContext db = new RoadPenaltyContext();
             grid_cars.Rows.Clear();
             db.Automobiles.ToList().ForEach(e =>
                 grid_cars.Rows.Add(e.Number, e.InsuranceValue, e.Model.Manufacturer.ManufacturerName,
                 e.Model.Model1, e.Color.ColorName));
+                */
         }
 
         private void init_violations_table()
@@ -345,6 +352,7 @@ namespace PenaltyManager
 
         public int GetSelectedCarId()
         {
+            /*
             if (grid_cars.SelectedCells.Count == 0)
                 return -1;
             // get the selected row number
@@ -353,7 +361,8 @@ namespace PenaltyManager
             string stringId = (string)grid_cars.Rows[selectedRow].Cells[0].Value;
             int ret;
             int.TryParse(stringId, out ret);
-            return ret;
+            */
+            return -1;
         }
 
         private void button_updateModels_Click(object sender, EventArgs e)
@@ -464,6 +473,127 @@ namespace PenaltyManager
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        // Search button -_- I hate c# and DB
+        private void button1_Click(object sender, EventArgs e)
+        {
+            m_foundCar = null;
+            m_foundDriver = null;
+
+            string enteredName = textBox_driverName.Text;
+            string enteredSurname = textBox_driverSurname.Text;
+            string enteredCarNumber = textBox_carNumber.Text;
+
+            Driver foundDriver = FindDriver(enteredName + " " + enteredSurname);
+            Automobile foundCar = FindCar(enteredCarNumber);
+
+            if(foundDriver == null && foundCar == null)
+            {
+                ShowError("Could not find neither a driver with provided name nor a car with the number.");
+                return;
+            }
+
+            if(foundCar == null)
+            {
+                m_foundDriver = foundDriver;
+                FillSearchInfoByDriver(foundDriver);
+            }
+            else
+            {
+                m_foundCar = foundCar;
+                FillSearchInfoByCar(foundCar);
+            }
+            label_resultDriverName_CarNumber.Visible = true;
+        }
+
+        private Driver FindDriver(string fullName)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Driver foundDriver = db.Drivers.Where(f => f.FullName == fullName).FirstOrDefault();
+            return foundDriver;
+        }
+
+        private Automobile FindCar(string carNumber)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Automobile foundCar = db.Automobiles.Where(f => f.Number == carNumber).FirstOrDefault();
+            return foundCar;
+        }
+
+        // Will fill the table with the cars that belongs to the found driver
+        private void FillSearchInfoByDriver(Driver driver)
+        {
+            label_driverOrCar.Text = "driver";
+            label_resultDriverName_CarNumber.Text = driver.FullName;
+            dataGridView_searchResults.Columns.Clear();
+            dataGridView_searchResults.Rows.Clear();
+
+            dataGridView_searchResults.Columns.Add("Car number", "Car number");
+            dataGridView_searchResults.Columns.Add("Car manufacturer", "Car manufacturer");
+            dataGridView_searchResults.Columns.Add("Car model", "Car model");
+            dataGridView_searchResults.Columns.Add("Insurance is valid", "Insurance is valid");
+            dataGridView_searchResults.Columns.Add("Insurance value", "Insurance value");
+
+            if(driver.Automobiles.Count == 0)
+            {
+                ShowWarning("Looks like the provided driver does not have a car.");
+                return;
+            }
+            
+            foreach(var car in driver.Automobiles)
+            {
+                dataGridView_searchResults.Rows.Add(
+                car.Number,
+                car.Model.Manufacturer.ManufacturerName,
+                car.Model.Model1,
+                car.Insurance.IsValid,
+                car.InsuranceValue);
+            }
+
+        }
+
+        // Will fill the table with the drivers who can drive the found car
+        private void FillSearchInfoByCar(Automobile car)
+        {
+            label_driverOrCar.Text = "car with №";
+            label_resultDriverName_CarNumber.Text = car.Number;
+            dataGridView_searchResults.Columns.Clear();
+            dataGridView_searchResults.Rows.Clear();
+
+            if (car.Drivers.Count == 0)
+            {
+                ShowWarning("Looks like the provided car has no assigned driver.");
+                return;
+            }
+
+            dataGridView_searchResults.Columns.Add("Driver full name", "Driver full name");
+            dataGridView_searchResults.Columns.Add("License number", "License number");
+
+            foreach(var driver in car.Drivers)
+            {
+                dataGridView_searchResults.Rows.Add(
+                    driver.FullName,
+                    driver.License
+                    );
+            }
+        }
+
+        private void label_resultDriverName_CarNumber_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (m_foundDriver != null)
+            {
+                FoundDriverCarInfo form = new FoundDriverCarInfo(m_foundDriver);
+                form.Show();
+                return;
+            }
+            
+            if(m_foundCar != null)
+            {
+                FoundDriverCarInfo form = new FoundDriverCarInfo(m_foundCar);
+                form.Show();
+                return;
+            }
         }
     }
 }

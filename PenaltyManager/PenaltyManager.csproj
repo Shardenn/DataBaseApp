@@ -105,6 +105,12 @@
     <Compile Include="DataModel\Insurance.cs" />
     <Compile Include="DataModel\Manufacturer.cs" />
     <Compile Include="DataModel\Model.cs" />
+    <Compile Include="FoundDriverCarInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FoundDriverCarInfo.Designer.cs">
+      <DependentUpon>FoundDriverCarInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="InsuranceUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoundDriverCarInfo.resx">
+      <DependentUpon>FoundDriverCarInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InsuranceUpdate.resx">
       <DependentUpon>InsuranceUpdate.cs</DependentUpon>
