@@ -40,6 +40,21 @@
             this.button_editViolation = new System.Windows.Forms.Button();
             this.button_addViolation = new System.Windows.Forms.Button();
             this.grid_violations = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label_resultDriverName_CarNumber = new System.Windows.Forms.LinkLabel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.dataGridView_searchResults = new System.Windows.Forms.DataGridView();
+            this.label_driverOrCar = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox_carNumber = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_driverSurname = new System.Windows.Forms.TextBox();
+            this.textBox_driverName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -80,26 +95,18 @@
             this.manufacturersTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ManufacturersTableAdapter();
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_driverName = new System.Windows.Forms.TextBox();
-            this.textBox_driverSurname = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_carNumber = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label_driverOrCar = new System.Windows.Forms.Label();
-            this.dataGridView_searchResults = new System.Windows.Forms.DataGridView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label_resultDriverName_CarNumber = new System.Windows.Forms.LinkLabel();
+            this.button_addDriver = new System.Windows.Forms.Button();
+            this.button_addCar = new System.Windows.Forms.Button();
+            this.button_addDriverCarConnection = new System.Windows.Forms.Button();
+            this.button_editFoundEntity = new System.Windows.Forms.Button();
+            this.button_editDriverCarConnection = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_violations)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_models)).BeginInit();
@@ -119,8 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -232,6 +237,170 @@
             this.grid_violations.RowHeadersVisible = false;
             this.grid_violations.Size = new System.Drawing.Size(798, 354);
             this.grid_violations.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage2.Controls.Add(this.button_editDriverCarConnection);
+            this.tabPage2.Controls.Add(this.button_editFoundEntity);
+            this.tabPage2.Controls.Add(this.button_addDriverCarConnection);
+            this.tabPage2.Controls.Add(this.button_addCar);
+            this.tabPage2.Controls.Add(this.button_addDriver);
+            this.tabPage2.Controls.Add(this.label_resultDriverName_CarNumber);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.dataGridView_searchResults);
+            this.tabPage2.Controls.Add(this.label_driverOrCar);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.textBox_carNumber);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.textBox_driverSurname);
+            this.tabPage2.Controls.Add(this.textBox_driverName);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.textBox8);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(804, 407);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Cars and drivers management";
+            // 
+            // label_resultDriverName_CarNumber
+            // 
+            this.label_resultDriverName_CarNumber.AutoSize = true;
+            this.label_resultDriverName_CarNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_resultDriverName_CarNumber.Location = new System.Drawing.Point(9, 201);
+            this.label_resultDriverName_CarNumber.Name = "label_resultDriverName_CarNumber";
+            this.label_resultDriverName_CarNumber.Size = new System.Drawing.Size(80, 20);
+            this.label_resultDriverName_CarNumber.TabIndex = 27;
+            this.label_resultDriverName_CarNumber.TabStop = true;
+            this.label_resultDriverName_CarNumber.Text = "linkLabel1";
+            this.label_resultDriverName_CarNumber.Visible = false;
+            this.label_resultDriverName_CarNumber.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.label_resultDriverName_CarNumber_LinkClicked);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(419, 6);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(200, 20);
+            this.textBox2.TabIndex = 26;
+            this.textBox2.Text = "Search results";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dataGridView_searchResults
+            // 
+            this.dataGridView_searchResults.AllowUserToAddRows = false;
+            this.dataGridView_searchResults.AllowUserToDeleteRows = false;
+            this.dataGridView_searchResults.AllowUserToOrderColumns = true;
+            this.dataGridView_searchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_searchResults.Location = new System.Drawing.Point(214, 30);
+            this.dataGridView_searchResults.Name = "dataGridView_searchResults";
+            this.dataGridView_searchResults.RowHeadersVisible = false;
+            this.dataGridView_searchResults.Size = new System.Drawing.Size(582, 371);
+            this.dataGridView_searchResults.TabIndex = 25;
+            // 
+            // label_driverOrCar
+            // 
+            this.label_driverOrCar.AutoSize = true;
+            this.label_driverOrCar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label_driverOrCar.Location = new System.Drawing.Point(135, 172);
+            this.label_driverOrCar.Name = "label_driverOrCar";
+            this.label_driverOrCar.Size = new System.Drawing.Size(86, 13);
+            this.label_driverOrCar.TabIndex = 22;
+            this.label_driverOrCar.Text = "DRIVERORCAR";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(9, 172);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Showing search results for";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(105, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(26, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "OR:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(108, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox_carNumber
+            // 
+            this.textBox_carNumber.Location = new System.Drawing.Point(108, 103);
+            this.textBox_carNumber.Name = "textBox_carNumber";
+            this.textBox_carNumber.Size = new System.Drawing.Size(100, 20);
+            this.textBox_carNumber.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(9, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Car number";
+            // 
+            // textBox_driverSurname
+            // 
+            this.textBox_driverSurname.Location = new System.Drawing.Point(108, 56);
+            this.textBox_driverSurname.Name = "textBox_driverSurname";
+            this.textBox_driverSurname.Size = new System.Drawing.Size(100, 20);
+            this.textBox_driverSurname.TabIndex = 16;
+            // 
+            // textBox_driverName
+            // 
+            this.textBox_driverName.Location = new System.Drawing.Point(108, 30);
+            this.textBox_driverName.Name = "textBox_driverName";
+            this.textBox_driverName.Size = new System.Drawing.Size(100, 20);
+            this.textBox_driverName.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(9, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Driver surname";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(9, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Driver name";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(8, 6);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(200, 20);
+            this.textBox8.TabIndex = 12;
+            this.textBox8.Text = "Search for drivers or cars";
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // tabPage3
             // 
@@ -576,164 +745,52 @@
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
             // 
-            // textBox8
+            // button_addDriver
             // 
-            this.textBox8.Location = new System.Drawing.Point(8, 6);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(200, 20);
-            this.textBox8.TabIndex = 12;
-            this.textBox8.Text = "Search for drivers or cars";
-            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
+            this.button_addDriver.Location = new System.Drawing.Point(12, 289);
+            this.button_addDriver.Name = "button_addDriver";
+            this.button_addDriver.Size = new System.Drawing.Size(90, 23);
+            this.button_addDriver.TabIndex = 28;
+            this.button_addDriver.Text = "Add a driver";
+            this.button_addDriver.UseVisualStyleBackColor = true;
+            this.button_addDriver.Click += new System.EventHandler(this.button_addDriver_Click);
             // 
-            // label1
+            // button_addCar
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(9, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Driver name";
+            this.button_addCar.Location = new System.Drawing.Point(12, 318);
+            this.button_addCar.Name = "button_addCar";
+            this.button_addCar.Size = new System.Drawing.Size(90, 23);
+            this.button_addCar.TabIndex = 29;
+            this.button_addCar.Text = "Add a car";
+            this.button_addCar.UseVisualStyleBackColor = true;
+            this.button_addCar.Click += new System.EventHandler(this.button_addCar_Click);
             // 
-            // label2
+            // button_addDriverCarConnection
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(9, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Driver surname";
+            this.button_addDriverCarConnection.Location = new System.Drawing.Point(108, 289);
+            this.button_addDriverCarConnection.Name = "button_addDriverCarConnection";
+            this.button_addDriverCarConnection.Size = new System.Drawing.Size(100, 52);
+            this.button_addDriverCarConnection.TabIndex = 30;
+            this.button_addDriverCarConnection.Text = "Create new driver-car connection";
+            this.button_addDriverCarConnection.UseVisualStyleBackColor = true;
             // 
-            // textBox_driverName
+            // button_editFoundEntity
             // 
-            this.textBox_driverName.Location = new System.Drawing.Point(108, 30);
-            this.textBox_driverName.Name = "textBox_driverName";
-            this.textBox_driverName.Size = new System.Drawing.Size(100, 20);
-            this.textBox_driverName.TabIndex = 15;
+            this.button_editFoundEntity.Location = new System.Drawing.Point(13, 347);
+            this.button_editFoundEntity.Name = "button_editFoundEntity";
+            this.button_editFoundEntity.Size = new System.Drawing.Size(89, 52);
+            this.button_editFoundEntity.TabIndex = 31;
+            this.button_editFoundEntity.Text = "Edit found entity";
+            this.button_editFoundEntity.UseVisualStyleBackColor = true;
             // 
-            // textBox_driverSurname
+            // button_editDriverCarConnection
             // 
-            this.textBox_driverSurname.Location = new System.Drawing.Point(108, 56);
-            this.textBox_driverSurname.Name = "textBox_driverSurname";
-            this.textBox_driverSurname.Size = new System.Drawing.Size(100, 20);
-            this.textBox_driverSurname.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(9, 106);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Car number";
-            // 
-            // textBox_carNumber
-            // 
-            this.textBox_carNumber.Location = new System.Drawing.Point(108, 103);
-            this.textBox_carNumber.Name = "textBox_carNumber";
-            this.textBox_carNumber.Size = new System.Drawing.Size(100, 20);
-            this.textBox_carNumber.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(108, 129);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(105, 87);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "OR:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(9, 172);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Showing search results for";
-            // 
-            // label_driverOrCar
-            // 
-            this.label_driverOrCar.AutoSize = true;
-            this.label_driverOrCar.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label_driverOrCar.Location = new System.Drawing.Point(135, 172);
-            this.label_driverOrCar.Name = "label_driverOrCar";
-            this.label_driverOrCar.Size = new System.Drawing.Size(86, 13);
-            this.label_driverOrCar.TabIndex = 22;
-            this.label_driverOrCar.Text = "DRIVERORCAR";
-            // 
-            // dataGridView_searchResults
-            // 
-            this.dataGridView_searchResults.AllowUserToAddRows = false;
-            this.dataGridView_searchResults.AllowUserToDeleteRows = false;
-            this.dataGridView_searchResults.AllowUserToOrderColumns = true;
-            this.dataGridView_searchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_searchResults.Location = new System.Drawing.Point(214, 30);
-            this.dataGridView_searchResults.Name = "dataGridView_searchResults";
-            this.dataGridView_searchResults.RowHeadersVisible = false;
-            this.dataGridView_searchResults.Size = new System.Drawing.Size(582, 371);
-            this.dataGridView_searchResults.TabIndex = 25;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(419, 6);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 20);
-            this.textBox2.TabIndex = 26;
-            this.textBox2.Text = "Search results";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.DimGray;
-            this.tabPage2.Controls.Add(this.label_resultDriverName_CarNumber);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.dataGridView_searchResults);
-            this.tabPage2.Controls.Add(this.label_driverOrCar);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.textBox_carNumber);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.textBox_driverSurname);
-            this.tabPage2.Controls.Add(this.textBox_driverName);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.textBox8);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(804, 407);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Cars and drivers management";
-            // 
-            // label_resultDriverName_CarNumber
-            // 
-            this.label_resultDriverName_CarNumber.AutoSize = true;
-            this.label_resultDriverName_CarNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_resultDriverName_CarNumber.Location = new System.Drawing.Point(9, 201);
-            this.label_resultDriverName_CarNumber.Name = "label_resultDriverName_CarNumber";
-            this.label_resultDriverName_CarNumber.Size = new System.Drawing.Size(80, 20);
-            this.label_resultDriverName_CarNumber.TabIndex = 27;
-            this.label_resultDriverName_CarNumber.TabStop = true;
-            this.label_resultDriverName_CarNumber.Text = "linkLabel1";
-            this.label_resultDriverName_CarNumber.Visible = false;
-            this.label_resultDriverName_CarNumber.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.label_resultDriverName_CarNumber_LinkClicked);
+            this.button_editDriverCarConnection.Location = new System.Drawing.Point(108, 347);
+            this.button_editDriverCarConnection.Name = "button_editDriverCarConnection";
+            this.button_editDriverCarConnection.Size = new System.Drawing.Size(100, 52);
+            this.button_editDriverCarConnection.TabIndex = 32;
+            this.button_editDriverCarConnection.Text = "Remove selected driver-car connection";
+            this.button_editDriverCarConnection.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -752,6 +809,9 @@
             this.tabPage1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_violations)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -772,9 +832,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.voilationTypeBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -848,6 +905,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.LinkLabel label_resultDriverName_CarNumber;
+        private System.Windows.Forms.Button button_editFoundEntity;
+        private System.Windows.Forms.Button button_addDriverCarConnection;
+        private System.Windows.Forms.Button button_addCar;
+        private System.Windows.Forms.Button button_addDriver;
+        private System.Windows.Forms.Button button_editDriverCarConnection;
     }
 }
 

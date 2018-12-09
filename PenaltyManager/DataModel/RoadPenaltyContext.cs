@@ -61,6 +61,10 @@ namespace PenaltyManager
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Insurance>()
+                .Property(e => e.Number)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Insurance>()
                 .HasMany(e => e.Automobiles)
                 .WithOptional(e => e.Insurance)
                 .HasForeignKey(e => e.Insurance_id);

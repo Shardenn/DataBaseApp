@@ -35,9 +35,10 @@ namespace PenaltyManager
             refresh_manufacturers_table();
             refresh_models_table();
 
-            refresh_drivers_table();
-            refresh_insurances_table();
-            refresh_cars_table();
+            if (m_foundDriver != null)
+                FillSearchInfoByDriver(m_foundDriver);
+            else if (m_foundCar != null)
+                FillSearchInfoByCar(m_foundCar);
 
             refresh_violations_table();
         }
@@ -328,13 +329,7 @@ namespace PenaltyManager
 
         private void grid_car_colors_CellContentClick(object sender, DataGridViewCellEventArgs e){}
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e){}
-
-        private void button_updateDrivers_Click(object sender, EventArgs e)
-        {
-            DriversUpdate drvUpdateForm = new DriversUpdate(this);
-            drvUpdateForm.Show();
-            Enabled = false;
-        }
+        
 
         private void button_updateInsurances_Click(object sender, EventArgs e)
         {
@@ -594,6 +589,20 @@ namespace PenaltyManager
                 form.Show();
                 return;
             }
+        }
+
+        private void button_addDriver_Click(object sender, EventArgs e)
+        {
+            AddDriver form = new AddDriver(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_addCar_Click(object sender, EventArgs e)
+        {
+            AddCar form = new AddCar(this);
+            form.Show();
+            Enabled = false;
         }
     }
 }
