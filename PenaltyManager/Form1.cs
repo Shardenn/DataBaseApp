@@ -4,10 +4,11 @@ using System.Windows.Forms;
 
 namespace PenaltyManager
 {
+
     public partial class MainWindow : Form
     {
-        private Driver m_foundDriver = null;
-        private Automobile m_foundCar = null;
+        private int m_foundDriverID = -1;
+        private int m_foundCarID = -1;
 
         public MainWindow()
         {
@@ -32,7 +33,7 @@ namespace PenaltyManager
             refresh_manufacturers_table();
             refresh_models_table();
             
-            if (m_foundDriver != null || m_foundCar != null)
+            if (m_foundDriverID != -1 || m_foundCarID != -1)
                 button1_Click(this, null);
 
             refresh_violations_table();
@@ -393,8 +394,8 @@ namespace PenaltyManager
         // Search button -_- I hate c# and DB
         private void button1_Click(object sender, EventArgs e)
         {
-            m_foundCar = null;
-            m_foundDriver = null;
+            m_foundCarID = -1;
+            m_foundDriverID = -1;
 
             string enteredName = textBox_driverName.Text;
             string enteredSurname = textBox_driverSurname.Text;
@@ -411,12 +412,12 @@ namespace PenaltyManager
 
             if(foundCar == null)
             {
-                m_foundDriver = foundDriver;
+                m_foundDriverID = foundDriver.Id;
                 FillSearchInfoByDriver(foundDriver);
             }
             else
             {
-                m_foundCar = foundCar;
+                m_foundCarID = foundCar.Id;
                 FillSearchInfoByCar(foundCar);
             }
             label_resultDriverName_CarNumber.Visible = true;
@@ -496,16 +497,16 @@ namespace PenaltyManager
 
         private void label_resultDriverName_CarNumber_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (m_foundDriver != null)
+            if (m_foundDriverID != -1)
             {
-                FoundDriverCarInfo form = new FoundDriverCarInfo(m_foundDriver);
+                FoundDriverInfo form = new FoundDriverInfo(m_foundDriverID, this);
                 form.Show();
                 return;
             }
             
-            if(m_foundCar != null)
+            if(m_foundCarID != -1)
             {
-                FoundDriverCarInfo form = new FoundDriverCarInfo(m_foundCar);
+                FoundDriverInfo form = new FoundDriverInfo(m_foundCarID, this);
                 form.Show();
                 return;
             }
@@ -534,20 +535,52 @@ namespace PenaltyManager
 
         private void button_editDriverCarConnection_Click(object sender, EventArgs e)
         {
-            if (m_foundCar != null)
-                RemoveDriverCarConnection(m_foundCar);
-            else if (m_foundDriver != null)
-                RemoveDriverCarConnection(m_foundDriver);
+            if (m_foundCarID != -1)
+                RemoveCarDriverConnection(m_foundCarID);
+            else if (m_foundDriverID != -1)
+                RemoveDriverCarConnection(m_foundDriverID);
         }
 
-        private void RemoveDriverCarConnection(Driver driver)
+        private void RemoveDriverCarConnection(int driverID)
         {
+            int selectedIndex = dataGridView_searchResults.SelectedCells[0].RowIndex;
+            string carNumber = dataGridView_searchResults.Rows[selectedIndex].Cells["Car number"].Value.ToString();
 
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Automobile car = db.Automobiles.Where(f => f.Number == carNumber).FirstOrDefault();
+            Driver driver = db.Drivers.Find(driverID);
+            if (car != null)
+            {
+                car.Drivers.Remove(driver);
+                driver.Automobiles.Remove(car);
+            }
+            else
+            {
+                ShowError("No car is selected in the table");
+            }
+            db.SaveChanges();
+            RefreshAllTables();
         }
 
-        private void RemoveDriverCarConnection(Automobile car)
+        private void RemoveCarDriverConnection(int carID)
         {
+            int selectedIndex = dataGridView_searchResults.SelectedCells[0].RowIndex;
+            string name = dataGridView_searchResults.Rows[selectedIndex].Cells["Driver full name"].Value.ToString();
 
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Driver driver = db.Drivers.Where(f => f.FullName == name).FirstOrDefault();
+            Automobile car = db.Automobiles.Find(carID);
+            if (driver != null)
+            {
+                car.Drivers.Remove(driver);
+                driver.Automobiles.Remove(car);
+            }
+            else
+            {
+                ShowError("No driver is selected in the table");
+            }
+            db.SaveChanges();
+            RefreshAllTables();
         }
     }
 }

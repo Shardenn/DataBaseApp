@@ -98,6 +98,7 @@
             this.gridView_cars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView_cars.Location = new System.Drawing.Point(12, 95);
             this.gridView_cars.Name = "gridView_cars";
+            this.gridView_cars.ReadOnly = true;
             this.gridView_cars.RowHeadersVisible = false;
             this.gridView_cars.Size = new System.Drawing.Size(423, 132);
             this.gridView_cars.TabIndex = 7;
@@ -159,6 +160,7 @@
             this.gridView_drivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView_drivers.Location = new System.Drawing.Point(444, 95);
             this.gridView_drivers.Name = "gridView_drivers";
+            this.gridView_drivers.ReadOnly = true;
             this.gridView_drivers.RowHeadersVisible = false;
             this.gridView_drivers.Size = new System.Drawing.Size(423, 132);
             this.gridView_drivers.TabIndex = 13;

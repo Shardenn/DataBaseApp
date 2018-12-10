@@ -52,13 +52,24 @@ namespace PenaltyManager
                 return;
             }
 
-            AddCarToDB(textBox_carNumber.Text, insVal, ins, foundModel, color);
-            RefreshAndClose();
+            if(AddCarToDB(textBox_carNumber.Text, insVal, ins, foundModel, color))
+                RefreshAndClose();
         }
 
-        private void AddCarToDB(string number, int insValue, Insurance ins, Model model, Color color)
+        private bool AddCarToDB(string number, int insValue, Insurance ins, Model model, Color color)
         {
-            
+            var foundCars = db.Automobiles.Where(f => f.Number == number);
+            if(foundCars.Count() > 0)
+            {
+                MainWindow.ShowError("A car with such a number already exists.");
+                return false;
+            }
+            if(insValue < 0)
+            {
+                MainWindow.ShowError("Insurance value should be positive.");
+                return false;
+            }
+
             Automobile car = new Automobile();
 
             car.Number = number;
@@ -70,6 +81,7 @@ namespace PenaltyManager
 
             db.Automobiles.Add(car);
             db.SaveChanges();
+            return true;
         }
 
         // get the model ibject from the selected manufacturer-model string

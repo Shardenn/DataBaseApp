@@ -233,7 +233,6 @@
             this.grid_violations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_violations.Location = new System.Drawing.Point(3, 3);
             this.grid_violations.Name = "grid_violations";
-            this.grid_violations.ReadOnly = true;
             this.grid_violations.RowHeadersVisible = false;
             this.grid_violations.Size = new System.Drawing.Size(798, 354);
             this.grid_violations.TabIndex = 0;

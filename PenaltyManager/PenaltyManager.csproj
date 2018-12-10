@@ -73,6 +73,12 @@
     <Compile Include="AddDriverCarConnection.Designer.cs">
       <DependentUpon>AddDriverCarConnection.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddInsurance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddInsurance.Designer.cs">
+      <DependentUpon>AddInsurance.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddViolation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,11 +123,17 @@
     <Compile Include="DataModel\Insurance.cs" />
     <Compile Include="DataModel\Manufacturer.cs" />
     <Compile Include="DataModel\Model.cs" />
-    <Compile Include="FoundDriverCarInfo.cs">
+    <Compile Include="FoundCarInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FoundDriverCarInfo.Designer.cs">
-      <DependentUpon>FoundDriverCarInfo.cs</DependentUpon>
+    <Compile Include="FoundCarInfo.Designer.cs">
+      <DependentUpon>FoundCarInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FoundDriverInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FoundDriverInfo.Designer.cs">
+      <DependentUpon>FoundDriverInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="InsuranceUpdate.cs">
       <SubType>Form</SubType>
@@ -191,6 +203,9 @@
     <EmbeddedResource Include="AddDriverCarConnection.resx">
       <DependentUpon>AddDriverCarConnection.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddInsurance.resx">
+      <DependentUpon>AddInsurance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddViolation.resx">
       <DependentUpon>AddViolation.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,8 +224,11 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FoundDriverCarInfo.resx">
-      <DependentUpon>FoundDriverCarInfo.cs</DependentUpon>
+    <EmbeddedResource Include="FoundCarInfo.resx">
+      <DependentUpon>FoundCarInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoundDriverInfo.resx">
+      <DependentUpon>FoundDriverInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InsuranceUpdate.resx">
       <DependentUpon>InsuranceUpdate.cs</DependentUpon>

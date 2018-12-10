@@ -31,16 +31,22 @@ namespace PenaltyManager
                 return;
             }
 
-            AddDriverToDB(fullName, license);
-
-            RefreshAndClose();
+            if(AddDriverToDB(fullName, license))
+                RefreshAndClose();
         }
 
-        private void AddDriverToDB(string fullName = "", string license = "")
+        private bool AddDriverToDB(string fullName = "", string license = "")
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
+            var foundDrivers = db.Drivers.Where(f => f.License == license);
+            if(foundDrivers.Count() > 0)
+            {
+                MainWindow.ShowError("Such a license already exists.");
+                return false;
+            }
             db.Drivers.Add(new Driver { FullName = fullName, License = license });
             db.SaveChanges();
+            return true;
         }
 
         private void AddDriver_Load(object sender, EventArgs e)
