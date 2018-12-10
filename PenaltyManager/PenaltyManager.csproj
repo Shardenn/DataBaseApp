@@ -67,6 +67,12 @@
     <Compile Include="AddDriver.Designer.cs">
       <DependentUpon>AddDriver.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddDriverCarConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDriverCarConnection.Designer.cs">
+      <DependentUpon>AddDriverCarConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddViolation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddDriver.resx">
       <DependentUpon>AddDriver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddDriverCarConnection.resx">
+      <DependentUpon>AddDriverCarConnection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddViolation.resx">
       <DependentUpon>AddViolation.cs</DependentUpon>

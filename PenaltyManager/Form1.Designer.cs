@@ -41,6 +41,11 @@
             this.button_addViolation = new System.Windows.Forms.Button();
             this.grid_violations = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button_editDriverCarConnection = new System.Windows.Forms.Button();
+            this.button_editRemoveFoundEntity = new System.Windows.Forms.Button();
+            this.button_addDriverCarConnection = new System.Windows.Forms.Button();
+            this.button_addCar = new System.Windows.Forms.Button();
+            this.button_addDriver = new System.Windows.Forms.Button();
             this.label_resultDriverName_CarNumber = new System.Windows.Forms.LinkLabel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView_searchResults = new System.Windows.Forms.DataGridView();
@@ -95,11 +100,6 @@
             this.manufacturersTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ManufacturersTableAdapter();
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button_addDriver = new System.Windows.Forms.Button();
-            this.button_addCar = new System.Windows.Forms.Button();
-            this.button_addDriverCarConnection = new System.Windows.Forms.Button();
-            this.button_editFoundEntity = new System.Windows.Forms.Button();
-            this.button_editDriverCarConnection = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -242,7 +242,7 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.DimGray;
             this.tabPage2.Controls.Add(this.button_editDriverCarConnection);
-            this.tabPage2.Controls.Add(this.button_editFoundEntity);
+            this.tabPage2.Controls.Add(this.button_editRemoveFoundEntity);
             this.tabPage2.Controls.Add(this.button_addDriverCarConnection);
             this.tabPage2.Controls.Add(this.button_addCar);
             this.tabPage2.Controls.Add(this.button_addDriver);
@@ -266,6 +266,55 @@
             this.tabPage2.Size = new System.Drawing.Size(804, 407);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Cars and drivers management";
+            // 
+            // button_editDriverCarConnection
+            // 
+            this.button_editDriverCarConnection.Location = new System.Drawing.Point(108, 347);
+            this.button_editDriverCarConnection.Name = "button_editDriverCarConnection";
+            this.button_editDriverCarConnection.Size = new System.Drawing.Size(100, 52);
+            this.button_editDriverCarConnection.TabIndex = 32;
+            this.button_editDriverCarConnection.Text = "Remove selected driver-car connection";
+            this.button_editDriverCarConnection.UseVisualStyleBackColor = true;
+            this.button_editDriverCarConnection.Click += new System.EventHandler(this.button_editDriverCarConnection_Click);
+            // 
+            // button_editRemoveFoundEntity
+            // 
+            this.button_editRemoveFoundEntity.Location = new System.Drawing.Point(13, 347);
+            this.button_editRemoveFoundEntity.Name = "button_editRemoveFoundEntity";
+            this.button_editRemoveFoundEntity.Size = new System.Drawing.Size(89, 52);
+            this.button_editRemoveFoundEntity.TabIndex = 31;
+            this.button_editRemoveFoundEntity.Text = "Edit/remove found entity";
+            this.button_editRemoveFoundEntity.UseVisualStyleBackColor = true;
+            // 
+            // button_addDriverCarConnection
+            // 
+            this.button_addDriverCarConnection.Location = new System.Drawing.Point(108, 289);
+            this.button_addDriverCarConnection.Name = "button_addDriverCarConnection";
+            this.button_addDriverCarConnection.Size = new System.Drawing.Size(100, 52);
+            this.button_addDriverCarConnection.TabIndex = 30;
+            this.button_addDriverCarConnection.Text = "Create new driver-car connection";
+            this.button_addDriverCarConnection.UseVisualStyleBackColor = true;
+            this.button_addDriverCarConnection.Click += new System.EventHandler(this.button_addDriverCarConnection_Click);
+            // 
+            // button_addCar
+            // 
+            this.button_addCar.Location = new System.Drawing.Point(12, 318);
+            this.button_addCar.Name = "button_addCar";
+            this.button_addCar.Size = new System.Drawing.Size(90, 23);
+            this.button_addCar.TabIndex = 29;
+            this.button_addCar.Text = "Add a car";
+            this.button_addCar.UseVisualStyleBackColor = true;
+            this.button_addCar.Click += new System.EventHandler(this.button_addCar_Click);
+            // 
+            // button_addDriver
+            // 
+            this.button_addDriver.Location = new System.Drawing.Point(12, 289);
+            this.button_addDriver.Name = "button_addDriver";
+            this.button_addDriver.Size = new System.Drawing.Size(90, 23);
+            this.button_addDriver.TabIndex = 28;
+            this.button_addDriver.Text = "Add a driver";
+            this.button_addDriver.UseVisualStyleBackColor = true;
+            this.button_addDriver.Click += new System.EventHandler(this.button_addDriver_Click);
             // 
             // label_resultDriverName_CarNumber
             // 
@@ -745,53 +794,6 @@
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
             // 
-            // button_addDriver
-            // 
-            this.button_addDriver.Location = new System.Drawing.Point(12, 289);
-            this.button_addDriver.Name = "button_addDriver";
-            this.button_addDriver.Size = new System.Drawing.Size(90, 23);
-            this.button_addDriver.TabIndex = 28;
-            this.button_addDriver.Text = "Add a driver";
-            this.button_addDriver.UseVisualStyleBackColor = true;
-            this.button_addDriver.Click += new System.EventHandler(this.button_addDriver_Click);
-            // 
-            // button_addCar
-            // 
-            this.button_addCar.Location = new System.Drawing.Point(12, 318);
-            this.button_addCar.Name = "button_addCar";
-            this.button_addCar.Size = new System.Drawing.Size(90, 23);
-            this.button_addCar.TabIndex = 29;
-            this.button_addCar.Text = "Add a car";
-            this.button_addCar.UseVisualStyleBackColor = true;
-            this.button_addCar.Click += new System.EventHandler(this.button_addCar_Click);
-            // 
-            // button_addDriverCarConnection
-            // 
-            this.button_addDriverCarConnection.Location = new System.Drawing.Point(108, 289);
-            this.button_addDriverCarConnection.Name = "button_addDriverCarConnection";
-            this.button_addDriverCarConnection.Size = new System.Drawing.Size(100, 52);
-            this.button_addDriverCarConnection.TabIndex = 30;
-            this.button_addDriverCarConnection.Text = "Create new driver-car connection";
-            this.button_addDriverCarConnection.UseVisualStyleBackColor = true;
-            // 
-            // button_editFoundEntity
-            // 
-            this.button_editFoundEntity.Location = new System.Drawing.Point(13, 347);
-            this.button_editFoundEntity.Name = "button_editFoundEntity";
-            this.button_editFoundEntity.Size = new System.Drawing.Size(89, 52);
-            this.button_editFoundEntity.TabIndex = 31;
-            this.button_editFoundEntity.Text = "Edit found entity";
-            this.button_editFoundEntity.UseVisualStyleBackColor = true;
-            // 
-            // button_editDriverCarConnection
-            // 
-            this.button_editDriverCarConnection.Location = new System.Drawing.Point(108, 347);
-            this.button_editDriverCarConnection.Name = "button_editDriverCarConnection";
-            this.button_editDriverCarConnection.Size = new System.Drawing.Size(100, 52);
-            this.button_editDriverCarConnection.TabIndex = 32;
-            this.button_editDriverCarConnection.Text = "Remove selected driver-car connection";
-            this.button_editDriverCarConnection.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -905,7 +907,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.LinkLabel label_resultDriverName_CarNumber;
-        private System.Windows.Forms.Button button_editFoundEntity;
+        private System.Windows.Forms.Button button_editRemoveFoundEntity;
         private System.Windows.Forms.Button button_addDriverCarConnection;
         private System.Windows.Forms.Button button_addCar;
         private System.Windows.Forms.Button button_addDriver;

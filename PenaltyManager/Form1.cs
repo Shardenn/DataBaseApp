@@ -20,10 +20,7 @@ namespace PenaltyManager
             init_manufacturers_table();
             init_violation_types_table();
             init_models_table();
-
-            init_drivers_table();
-            init_insurances_table();
-            init_cars_table();
+            
 
             init_violations_table();
         }
@@ -34,11 +31,9 @@ namespace PenaltyManager
             refresh_colors_table();
             refresh_manufacturers_table();
             refresh_models_table();
-
-            if (m_foundDriver != null)
-                FillSearchInfoByDriver(m_foundDriver);
-            else if (m_foundCar != null)
-                FillSearchInfoByCar(m_foundCar);
+            
+            if (m_foundDriver != null || m_foundCar != null)
+                button1_Click(this, null);
 
             refresh_violations_table();
         }
@@ -239,66 +234,6 @@ namespace PenaltyManager
             
         }
 
-        private void init_drivers_table()
-        {
-            //RoadPenaltyContext db = new RoadPenaltyContext();
-            //grid_drivers.Columns.Add("Name", "Full name");
-            //grid_drivers.Columns.Add("License", "Driver's license number");
-            //db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.Id, e.FullName, e.License));
-            //refresh_drivers_table();
-        }
-
-        private void refresh_drivers_table()
-        {
-            /*
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            //grid_drivers.Rows.Clear();
-            db.Drivers.ToList().ForEach(e => grid_drivers.Rows.Add(e.FullName, e.License));
-            */
-        }
-
-        private void init_insurances_table()
-        {
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            //grid_insurances.Columns.Add("DateTime", "Insurance time");
-            //grid_insurances.Columns.Add("IsValid", "Is valid");
-            db.SaveChanges();
-            refresh_insurances_table();
-        }
-
-        private void refresh_insurances_table()
-        {
-            /*
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            //grid_insurances.Rows.Clear();
-            db.Insurances.ToList().ForEach(e => grid_insurances.Rows.Add(e.InsuranceDate, e.IsValid));
-            */
-        }
-
-        private void init_cars_table()
-        {
-            /*
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_cars.Columns.Add("Number", "Car number");
-            grid_cars.Columns.Add("InsValue", "Insurance value");
-            grid_cars.Columns.Add("Manufacturer", "Manufacturer");
-            grid_cars.Columns.Add("Model", "Model");
-            grid_cars.Columns.Add("Color", "Color");
-            refresh_cars_table();
-            */
-        }
-
-        private void refresh_cars_table()
-        {
-            /*
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            grid_cars.Rows.Clear();
-            db.Automobiles.ToList().ForEach(e =>
-                grid_cars.Rows.Add(e.Number, e.InsuranceValue, e.Model.Manufacturer.ManufacturerName,
-                e.Model.Model1, e.Color.ColorName));
-                */
-        }
-
         private void init_violations_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
@@ -344,22 +279,7 @@ namespace PenaltyManager
             carForm.Show();
             Enabled = false;
         }
-
-        public int GetSelectedCarId()
-        {
-            /*
-            if (grid_cars.SelectedCells.Count == 0)
-                return -1;
-            // get the selected row number
-            int selectedRow = grid_cars.SelectedCells[0].RowIndex;
-            // and pick the first column - should be ID
-            string stringId = (string)grid_cars.Rows[selectedRow].Cells[0].Value;
-            int ret;
-            int.TryParse(stringId, out ret);
-            */
-            return -1;
-        }
-
+        
         private void button_updateModels_Click(object sender, EventArgs e)
         {
             ModelsUpdate modelsForm = new ModelsUpdate(this);
@@ -603,6 +523,31 @@ namespace PenaltyManager
             AddCar form = new AddCar(this);
             form.Show();
             Enabled = false;
+        }
+
+        private void button_addDriverCarConnection_Click(object sender, EventArgs e)
+        {
+            AddDriverCarConnection form = new AddDriverCarConnection(this);
+            form.Show();
+            Enabled = false;
+        }
+
+        private void button_editDriverCarConnection_Click(object sender, EventArgs e)
+        {
+            if (m_foundCar != null)
+                RemoveDriverCarConnection(m_foundCar);
+            else if (m_foundDriver != null)
+                RemoveDriverCarConnection(m_foundDriver);
+        }
+
+        private void RemoveDriverCarConnection(Driver driver)
+        {
+
+        }
+
+        private void RemoveDriverCarConnection(Automobile car)
+        {
+
         }
     }
 }
