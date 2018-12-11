@@ -108,6 +108,12 @@
     <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="DataModel\DataHandling.cs" />
     <Compile Include="DataModel\Driver.cs" />
+    <Compile Include="EditInsurance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditInsurance.Designer.cs">
+      <DependentUpon>EditInsurance.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditViolationNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,12 @@
     </Compile>
     <Compile Include="FoundDriverInfo.Designer.cs">
       <DependentUpon>FoundDriverInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancesManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsurancesManagement.Designer.cs">
+      <DependentUpon>InsurancesManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="InsuranceUpdate.cs">
       <SubType>Form</SubType>
@@ -218,6 +230,9 @@
     <EmbeddedResource Include="ColorUpdate.resx">
       <DependentUpon>ColorUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditInsurance.resx">
+      <DependentUpon>EditInsurance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditViolationNew.resx">
       <DependentUpon>EditViolationNew.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FoundDriverInfo.resx">
       <DependentUpon>FoundDriverInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InsurancesManagement.resx">
+      <DependentUpon>InsurancesManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InsuranceUpdate.resx">
       <DependentUpon>InsuranceUpdate.cs</DependentUpon>

@@ -69,6 +69,11 @@ namespace PenaltyManager
                 MainWindow.ShowError("Insurance value should be positive.");
                 return false;
             }
+            if(ins.Automobiles.Count() > 0)
+            {
+                MainWindow.ShowError("This insurance already has a car assigned");
+                return false;
+            }
 
             Automobile car = new Automobile();
 

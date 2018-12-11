@@ -100,6 +100,8 @@
             this.manufacturersTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ManufacturersTableAdapter();
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.button_manageInsurances = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -240,6 +242,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage2.Controls.Add(this.button_manageInsurances);
             this.tabPage2.Controls.Add(this.button_editDriverCarConnection);
             this.tabPage2.Controls.Add(this.button_editRemoveFoundEntity);
             this.tabPage2.Controls.Add(this.button_addDriverCarConnection);
@@ -793,6 +796,16 @@
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
             // 
+            // button_manageInsurances
+            // 
+            this.button_manageInsurances.Location = new System.Drawing.Point(13, 260);
+            this.button_manageInsurances.Name = "button_manageInsurances";
+            this.button_manageInsurances.Size = new System.Drawing.Size(195, 23);
+            this.button_manageInsurances.TabIndex = 33;
+            this.button_manageInsurances.Text = "Manage insurances";
+            this.button_manageInsurances.UseVisualStyleBackColor = true;
+            this.button_manageInsurances.Click += new System.EventHandler(this.button_manageInsurances_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -911,6 +924,8 @@
         private System.Windows.Forms.Button button_addCar;
         private System.Windows.Forms.Button button_addDriver;
         private System.Windows.Forms.Button button_editDriverCarConnection;
+        private System.Windows.Forms.Button button_manageInsurances;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }
 

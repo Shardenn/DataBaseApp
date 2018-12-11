@@ -586,5 +586,12 @@ namespace PenaltyManager
             db.SaveChanges();
             RefreshAllTables();
         }
+
+        private void button_manageInsurances_Click(object sender, EventArgs e)
+        {
+            InsurancesManagement form = new InsurancesManagement(this);
+            form.Show();
+            Enabled = false;
+        }
     }
 }
