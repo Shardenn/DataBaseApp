@@ -43,6 +43,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
@@ -51,7 +52,7 @@
             // 
             // textBox_fine
             // 
-            this.textBox_fine.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.textBox_fine.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox_fine.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBox_fine.Location = new System.Drawing.Point(97, 38);
             this.textBox_fine.Name = "textBox_fine";
@@ -70,7 +71,7 @@
             // 
             // comboBox_violationTypes
             // 
-            this.comboBox_violationTypes.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.comboBox_violationTypes.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.comboBox_violationTypes.DisplayMember = "Type";
             this.comboBox_violationTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_violationTypes.FormattingEnabled = true;
@@ -95,6 +96,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label4.Location = new System.Drawing.Point(12, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 13);
@@ -105,6 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(211, 112);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox_violationTypes);

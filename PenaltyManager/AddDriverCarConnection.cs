@@ -47,8 +47,9 @@ namespace PenaltyManager
             Driver selectedDriver = GetSelectedDriver();
             Automobile selectedCar = GetSelectedCar();
 
-            selectedDriver.Automobiles.Add(selectedCar);
-            selectedCar.Drivers.Add(selectedDriver);
+            //selectedDriver.Automobiles.Add(selectedCar);
+            selectedDriver.Insurances.Add(selectedCar.Insurance);
+            selectedCar.Insurance.Drivers.Add(selectedDriver);
 
             SaveAndClose();
         }
@@ -110,7 +111,14 @@ namespace PenaltyManager
 
         private void SaveAndClose()
         {
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                MainWindow.ShowError("A driver who has hit a man cannot own new cars");
+            }
             MainWindow main = (MainWindow)parentForm;
             if (main != null)
                 main.RefreshAllTables();

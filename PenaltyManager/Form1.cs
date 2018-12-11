@@ -451,24 +451,28 @@ namespace PenaltyManager
             dataGridView_searchResults.Columns.Add("Insurance is valid", "Insurance is valid");
             dataGridView_searchResults.Columns.Add("Insurance value", "Insurance value");
 
-            if(driver.Automobiles.Count == 0)
+            if(driver.Insurances.Count == 0)
             {
-                ShowWarning("Looks like the provided driver does not have a car.");
+                ShowWarning("Looks like the provided driver is not in an insurance.");
                 return;
             }
             
-            foreach(var car in driver.Automobiles)
+            // search for all insurances this driver in
+            foreach(var ins in driver.Insurances)
             {
+                // get all cars
+                var car = ins.Automobiles.FirstOrDefault();
                 dataGridView_searchResults.Rows.Add(
-                car.Number,
-                car.Model.Manufacturer.ManufacturerName,
-                car.Model.Model1,
-                car.Insurance.IsValid,
-                car.InsuranceValue);
+                    car.Number,
+                    car.Model.Manufacturer.ManufacturerName,
+                    car.Model.Model1,
+                    car.Insurance.IsValid,
+                    car.InsuranceValue);
             }
 
         }
 
+        // DONE
         // Will fill the table with the drivers who can drive the found car
         private void FillSearchInfoByCar(Automobile car)
         {
@@ -477,7 +481,7 @@ namespace PenaltyManager
             dataGridView_searchResults.Columns.Clear();
             dataGridView_searchResults.Rows.Clear();
 
-            if (car.Drivers.Count == 0)
+            if (car.Insurance.Drivers.Count == 0)
             {
                 ShowWarning("Looks like the provided car has no assigned driver.");
                 return;
@@ -486,7 +490,7 @@ namespace PenaltyManager
             dataGridView_searchResults.Columns.Add("Driver full name", "Driver full name");
             dataGridView_searchResults.Columns.Add("License number", "License number");
 
-            foreach(var driver in car.Drivers)
+            foreach(var driver in car.Insurance.Drivers)
             {
                 dataGridView_searchResults.Rows.Add(
                     driver.FullName,

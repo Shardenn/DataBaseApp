@@ -38,6 +38,7 @@ namespace PenaltyManager
 
         public virtual Color Color { get; set; }
 
+        // Owners of the automobile (why several of them?)
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Driver> Drivers { get; set; }
     }
