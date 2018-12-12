@@ -47,6 +47,10 @@
             this.colorsTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ColorsTableAdapter();
             this.modelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.modelsTableAdapter = new PenaltyManager.RoadPenaltiesDataSetTableAdapters.ModelsTableAdapter();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_owner = new System.Windows.Forms.ComboBox();
+            this.comboBox_license = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.roadPenaltiesDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.insuranceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorsBindingSource)).BeginInit();
@@ -55,6 +59,7 @@
             // 
             // comboBox_model
             // 
+            this.comboBox_model.DisplayMember = "id";
             this.comboBox_model.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_model.FormattingEnabled = true;
             this.comboBox_model.Location = new System.Drawing.Point(275, 34);
@@ -92,6 +97,7 @@
             // 
             // comboBox_color
             // 
+            this.comboBox_color.DisplayMember = "id";
             this.comboBox_color.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_color.FormattingEnabled = true;
             this.comboBox_color.Location = new System.Drawing.Point(275, 6);
@@ -129,9 +135,10 @@
             // 
             // comboBox_assignedIns
             // 
+            this.comboBox_assignedIns.DisplayMember = "id";
             this.comboBox_assignedIns.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_assignedIns.FormattingEnabled = true;
-            this.comboBox_assignedIns.Location = new System.Drawing.Point(112, 64);
+            this.comboBox_assignedIns.Location = new System.Drawing.Point(112, 90);
             this.comboBox_assignedIns.Name = "comboBox_assignedIns";
             this.comboBox_assignedIns.Size = new System.Drawing.Size(104, 21);
             this.comboBox_assignedIns.TabIndex = 26;
@@ -141,7 +148,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(7, 67);
+            this.label3.Location = new System.Drawing.Point(7, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 25;
@@ -149,7 +156,7 @@
             // 
             // button_add
             // 
-            this.button_add.Location = new System.Drawing.Point(275, 62);
+            this.button_add.Location = new System.Drawing.Point(275, 88);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(116, 23);
             this.button_add.TabIndex = 27;
@@ -189,12 +196,55 @@
             // 
             this.modelsTableAdapter.ClearBeforeFill = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(68, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Owner";
+            // 
+            // comboBox_owner
+            // 
+            this.comboBox_owner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_owner.FormattingEnabled = true;
+            this.comboBox_owner.Location = new System.Drawing.Point(112, 60);
+            this.comboBox_owner.Name = "comboBox_owner";
+            this.comboBox_owner.Size = new System.Drawing.Size(104, 21);
+            this.comboBox_owner.TabIndex = 29;
+            this.comboBox_owner.SelectedValueChanged += new System.EventHandler(this.comboBox_owner_SelectedValueChanged);
+            // 
+            // comboBox_license
+            // 
+            this.comboBox_license.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_license.FormattingEnabled = true;
+            this.comboBox_license.Location = new System.Drawing.Point(275, 60);
+            this.comboBox_license.Name = "comboBox_license";
+            this.comboBox_license.Size = new System.Drawing.Size(116, 21);
+            this.comboBox_license.TabIndex = 30;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(225, 63);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "License";
+            // 
             // AddCar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(404, 97);
+            this.ClientSize = new System.Drawing.Size(404, 120);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBox_license);
+            this.Controls.Add(this.comboBox_owner);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.comboBox_assignedIns);
             this.Controls.Add(this.label3);
@@ -239,5 +289,9 @@
         private RoadPenaltiesDataSetTableAdapters.ColorsTableAdapter colorsTableAdapter;
         private System.Windows.Forms.BindingSource modelsBindingSource;
         private RoadPenaltiesDataSetTableAdapters.ModelsTableAdapter modelsTableAdapter;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_owner;
+        private System.Windows.Forms.ComboBox comboBox_license;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -32,13 +32,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_driverName = new System.Windows.Forms.TextBox();
             this.textBox_licenseNumber = new System.Windows.Forms.TextBox();
-            this.gridView_insurances = new System.Windows.Forms.DataGridView();
+            this.gridView_carsAssigned = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.button_saveChanges = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.button_removeDriver = new System.Windows.Forms.Button();
             this.button_addInsurance = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView_insurances)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_carsAssigned)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -75,18 +75,19 @@
             this.textBox_licenseNumber.Size = new System.Drawing.Size(100, 20);
             this.textBox_licenseNumber.TabIndex = 3;
             // 
-            // gridView_insurances
+            // gridView_carsAssigned
             // 
-            this.gridView_insurances.AllowUserToAddRows = false;
-            this.gridView_insurances.AllowUserToDeleteRows = false;
-            this.gridView_insurances.AllowUserToOrderColumns = true;
-            this.gridView_insurances.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridView_insurances.ColumnHeadersVisible = false;
-            this.gridView_insurances.Location = new System.Drawing.Point(12, 157);
-            this.gridView_insurances.Name = "gridView_insurances";
-            this.gridView_insurances.ReadOnly = true;
-            this.gridView_insurances.Size = new System.Drawing.Size(305, 150);
-            this.gridView_insurances.TabIndex = 4;
+            this.gridView_carsAssigned.AllowUserToAddRows = false;
+            this.gridView_carsAssigned.AllowUserToDeleteRows = false;
+            this.gridView_carsAssigned.AllowUserToOrderColumns = true;
+            this.gridView_carsAssigned.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView_carsAssigned.ColumnHeadersVisible = false;
+            this.gridView_carsAssigned.Location = new System.Drawing.Point(12, 157);
+            this.gridView_carsAssigned.Name = "gridView_carsAssigned";
+            this.gridView_carsAssigned.ReadOnly = true;
+            this.gridView_carsAssigned.RowHeadersVisible = false;
+            this.gridView_carsAssigned.Size = new System.Drawing.Size(305, 150);
+            this.gridView_carsAssigned.TabIndex = 4;
             // 
             // label3
             // 
@@ -147,7 +148,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button_saveChanges);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.gridView_insurances);
+            this.Controls.Add(this.gridView_carsAssigned);
             this.Controls.Add(this.textBox_licenseNumber);
             this.Controls.Add(this.textBox_driverName);
             this.Controls.Add(this.label2);
@@ -156,7 +157,7 @@
             this.Text = "FoundDriverInfo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FoundDriverInfo_FormClosed);
             this.Load += new System.EventHandler(this.FoundDriverInfo_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridView_insurances)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView_carsAssigned)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,7 +169,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_driverName;
         private System.Windows.Forms.TextBox textBox_licenseNumber;
-        private System.Windows.Forms.DataGridView gridView_insurances;
+        private System.Windows.Forms.DataGridView gridView_carsAssigned;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_saveChanges;
         private System.Windows.Forms.Label label4;

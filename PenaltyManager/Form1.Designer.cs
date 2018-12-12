@@ -41,6 +41,7 @@
             this.button_addViolation = new System.Windows.Forms.Button();
             this.grid_violations = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button_manageInsurances = new System.Windows.Forms.Button();
             this.button_editDriverCarConnection = new System.Windows.Forms.Button();
             this.button_editRemoveFoundEntity = new System.Windows.Forms.Button();
             this.button_addDriverCarConnection = new System.Windows.Forms.Button();
@@ -101,7 +102,6 @@
             this.voilationTypeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.button_manageInsurances = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -238,6 +238,7 @@
             this.grid_violations.RowHeadersVisible = false;
             this.grid_violations.Size = new System.Drawing.Size(798, 354);
             this.grid_violations.TabIndex = 0;
+            this.grid_violations.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_violations_CellContentClick);
             // 
             // tabPage2
             // 
@@ -268,6 +269,16 @@
             this.tabPage2.Size = new System.Drawing.Size(804, 407);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Cars and drivers management";
+            // 
+            // button_manageInsurances
+            // 
+            this.button_manageInsurances.Location = new System.Drawing.Point(13, 260);
+            this.button_manageInsurances.Name = "button_manageInsurances";
+            this.button_manageInsurances.Size = new System.Drawing.Size(195, 23);
+            this.button_manageInsurances.TabIndex = 33;
+            this.button_manageInsurances.Text = "Manage insurances";
+            this.button_manageInsurances.UseVisualStyleBackColor = true;
+            this.button_manageInsurances.Click += new System.EventHandler(this.button_manageInsurances_Click);
             // 
             // button_editDriverCarConnection
             // 
@@ -795,16 +806,6 @@
             // 
             this.voilationTypeBindingSource1.DataSource = this.roadPenaltiesDataSetBindingSource;
             this.voilationTypeBindingSource1.Position = 0;
-            // 
-            // button_manageInsurances
-            // 
-            this.button_manageInsurances.Location = new System.Drawing.Point(13, 260);
-            this.button_manageInsurances.Name = "button_manageInsurances";
-            this.button_manageInsurances.Size = new System.Drawing.Size(195, 23);
-            this.button_manageInsurances.TabIndex = 33;
-            this.button_manageInsurances.Text = "Manage insurances";
-            this.button_manageInsurances.UseVisualStyleBackColor = true;
-            this.button_manageInsurances.Click += new System.EventHandler(this.button_manageInsurances_Click);
             // 
             // MainWindow
             // 

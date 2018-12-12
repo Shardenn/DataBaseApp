@@ -30,6 +30,18 @@ namespace PenaltyManager
             db.Insurances.ToList().ForEach(f => comboBox_assignedIns.Items.Add(f.Number));
             comboBox_assignedIns.SelectedItem = comboBox_assignedIns.Items[0];
 
+            foreach(var driver in db.Drivers)
+            {
+                if(!comboBox_owner.Items.Contains(driver.FullName))
+                {
+                    comboBox_owner.Items.Add(driver.FullName);
+                }
+            }
+            comboBox_owner.SelectedItem = comboBox_owner.Items[0];
+
+            FillLicenses();
+            comboBox_license.SelectedItem = comboBox_license.Items[0];
+
             foreach (var model in db.Models)
             {
                 comboBox_model.Items.Add(model.Manufacturer.ManufacturerName + " " + model.Model1);
@@ -37,26 +49,40 @@ namespace PenaltyManager
             comboBox_model.SelectedItem = comboBox_model.Items[0];
         }
 
+        private void FillLicenses()
+        {
+            comboBox_license.Items.Clear();
+            var selectedDrivers = db.Drivers.Where(f => f.FullName == comboBox_owner.SelectedItem.ToString());
+            foreach(var driver in selectedDrivers)
+            {
+                comboBox_license.Items.Add(driver.License);
+            }
+        }
+
         private void button_add_Click(object sender, EventArgs e)
         {
             Model foundModel = GetModelFromSelected(comboBox_model.SelectedItem.ToString());
             Insurance ins = GetInsuranceFomSelected(comboBox_assignedIns.SelectedItem.ToString());
             Color color = GetColorFromSelected(comboBox_color.SelectedItem.ToString());
+            Driver owner = GetDriverFromSelected(comboBox_owner.SelectedItem.ToString(), comboBox_license.SelectedItem.ToString());
+
             int insVal;
             if(!int.TryParse(textBox_insValue.Text, out insVal) ||
                 foundModel == null ||
                 ins == null ||
-                color == null)
+                color == null || 
+                owner == null ||
+                textBox_carNumber.Text == "")
             {
                 MainWindow.ShowError("Check your input or code. Error getting all data for car to add.");
                 return;
             }
 
-            if(AddCarToDB(textBox_carNumber.Text, insVal, ins, foundModel, color))
+            if(AddCarToDB(textBox_carNumber.Text, insVal, ins, foundModel, color, owner))
                 RefreshAndClose();
         }
 
-        private bool AddCarToDB(string number, int insValue, Insurance ins, Model model, Color color)
+        private bool AddCarToDB(string number, int insValue, Insurance ins, Model model, Color color, Driver owner)
         {
             var foundCars = db.Automobiles.Where(f => f.Number == number);
             if(foundCars.Count() > 0)
@@ -84,7 +110,12 @@ namespace PenaltyManager
             car.Model = model;
             car.Color = color;
 
+            car.Drivers.Clear();
+            car.Drivers.Add(owner);
+
             db.Automobiles.Add(car);
+            //db.SaveChanges();
+            owner.Automobiles.Add(car);
             db.SaveChanges();
             return true;
         }
@@ -104,14 +135,17 @@ namespace PenaltyManager
 
         private Insurance GetInsuranceFomSelected(string insuranceNum)
         {
-            //RoadPenaltyContext db = new RoadPenaltyContext();
             return db.Insurances.Where(f => f.Number == insuranceNum).FirstOrDefault();
         }
 
         private Color GetColorFromSelected(string color)
         {
-            //RoadPenaltyContext db = new RoadPenaltyContext();
             return db.Colors.Where(f => f.ColorName == color).FirstOrDefault();
+        }
+
+        private Driver GetDriverFromSelected(string name, string license)
+        {
+            return db.Drivers.Where(f => f.FullName == name && f.License == license).FirstOrDefault();
         }
 
         private void RefreshAndClose()
@@ -127,6 +161,10 @@ namespace PenaltyManager
             parentForm.Enabled = true;
         }
 
-        
+        private void comboBox_owner_SelectedValueChanged(object sender, EventArgs e)
+        {
+            FillLicenses();
+            comboBox_license.SelectedItem = comboBox_license.Items[0];
+        }
     }
 }

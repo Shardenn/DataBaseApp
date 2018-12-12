@@ -22,19 +22,17 @@ namespace PenaltyManager
             parentForm = parent;
         }
 
-        private void InitInsurancesTable()
+        private void InitCarsTable()
         {
-            gridView_insurances.Rows.Clear();
-            gridView_insurances.Columns.Clear();
+            gridView_carsAssigned.Rows.Clear();
+            gridView_carsAssigned.Columns.Clear();
 
-            gridView_insurances.Columns.Add("Insurance number", "Insurance number");
-            gridView_insurances.Columns.Add("Car assigned", "Car assigned");
-            gridView_insurances.Columns.Add("Value", "Value");
-            gridView_insurances.Columns.Add("Date", "Date");
-            gridView_insurances.Columns.Add("Is valid?", "Is valid?");
+            gridView_carsAssigned.Columns.Add("Car number", "Car number");
+            gridView_carsAssigned.Columns.Add("Insurance number", "Insurance number");
+            gridView_carsAssigned.Columns.Add("Is owner?", "Is owner?");
         }
 
-        private void FillInsurancesTable()
+        private void FillCarsTable()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
             Driver driver = db.Drivers.Find(driverId);
@@ -45,33 +43,42 @@ namespace PenaltyManager
                 Close();
             }
 
-            var cars = db.Automobiles.Where(f => f.Model.Manufacturer.ManufacturerName == "New Lada");
-            Insurance insur = new Insurance {
-                Drivers = { driver },
-                InsuranceDate = DateTime.Now,
-                IsValid = true,
-                Number = "testing1", Automobiles = cars.ToList()
-            };
-            driver.Insurances.Add(insur);
-
             var insurances = driver.Insurances;
-            foreach(var ins in insurances)
+            try
             {
-                Automobile carAssigned = ins.Automobiles.Last();
-                gridView_insurances.Rows.Add(
-                    ins.Number,
-                    carAssigned.Number,
-                    carAssigned.InsuranceValue,
-                    ins.InsuranceDate.ToString(),
-                    ins.IsValid.ToString()
-                    );
+                if (insurances.Count() < 1)
+                {
+                    MainWindow.ShowWarning("No insurances are assigned to the driver");
+                }
+                else foreach (var ins in insurances)
+                    {
+                        gridView_carsAssigned.Rows.Add(ins.Automobiles.FirstOrDefault().Number,
+                            ins.Number,
+                            "False");
+                    }
+
+                var carsOwned = driver.Automobiles;
+                if (carsOwned.Count() < 1)
+                {
+                    MainWindow.ShowWarning("No cars are owned by the driver");
+                }
+                else foreach (var car in carsOwned)
+                    {
+                        gridView_carsAssigned.Rows.Add(car.Number,
+                            car.Insurance.Number,
+                            "True");
+                    }
+            }
+            catch(Exception ex)
+            {
+                MainWindow.ShowError(ex.Message);
             }
         }
 
         private void FoundDriverInfo_Load(object sender, EventArgs e)
         {
-            InitInsurancesTable();
-            FillInsurancesTable();
+            InitCarsTable();
+            FillCarsTable();
             RoadPenaltyContext db = new RoadPenaltyContext();
             Driver driver = db.Drivers.Find(driverId);
             textBox_driverName.Text = driver.FullName;

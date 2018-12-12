@@ -111,17 +111,10 @@ namespace PenaltyManager
                 ShowError("Could not find a color to delete");
                 return;
             }
-
-            try
-            {
-                db.Colors.Remove(color);
-                db.SaveChanges();
-                RefreshAllTables();
-            }
-            catch(Exception exc)
-            {
-                ShowWarning("There are other tables referencing to that entity. Delete them first.");
-            }
+            
+            db.Colors.Remove(color);
+            db.SaveChanges();
+            RefreshAllTables();
         }
 
         // it is a color update actually 
@@ -507,8 +500,7 @@ namespace PenaltyManager
                 form.Show();
                 return;
             }
-            
-            if(m_foundCarID != -1)
+            else if(m_foundCarID != -1)
             {
                 FoundDriverInfo form = new FoundDriverInfo(m_foundCarID, this);
                 form.Show();
@@ -592,6 +584,11 @@ namespace PenaltyManager
             InsurancesManagement form = new InsurancesManagement(this);
             form.Show();
             Enabled = false;
+        }
+
+        private void grid_violations_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
