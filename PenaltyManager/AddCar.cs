@@ -104,8 +104,11 @@ namespace PenaltyManager
             Automobile car = new Automobile();
 
             car.Number = number;
-            car.InsuranceValue = insValue;
 
+            RoadPenaltiesEntities1 dbEnt = new RoadPenaltiesEntities1();
+            
+            car.InsuranceValue = dbEnt.CalculateInsurance(insValue);
+                        
             car.Insurance = ins;
             car.Model = model;
             car.Color = color;
@@ -116,7 +119,15 @@ namespace PenaltyManager
             db.Automobiles.Add(car);
             //db.SaveChanges();
             owner.Automobiles.Add(car);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                MainWindow.ShowError("A man who had hit the man cannot own a new car");
+                return false;
+            }
             return true;
         }
 

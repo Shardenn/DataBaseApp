@@ -34,6 +34,8 @@ namespace PenaltyManager
 
         private void FillCarsTable()
         {
+            
+
             RoadPenaltyContext db = new RoadPenaltyContext();
             Driver driver = db.Drivers.Find(driverId);
 
@@ -103,5 +105,22 @@ namespace PenaltyManager
             parentForm.Enabled = true;
         }
 
+        private void button_removeDriver_Click(object sender, EventArgs e)
+        {
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            Driver driver = db.Drivers.Find(driverId);
+            if(driver == null)
+            {
+                MainWindow.ShowError("Could not find a driver with id " + driverId.ToString() + " to delete");
+                return;
+            }
+            //driver.Automobiles.Clear();
+            //driver.Insurances.Clear();
+            
+            db.Drivers.Remove(driver);
+            db.SaveChanges();
+            //RefreshAndClose();
+            Close();
+        }
     }
 }

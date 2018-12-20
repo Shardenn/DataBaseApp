@@ -98,6 +98,10 @@ namespace PenaltyManager
                 .Property(e => e.Type)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Violation>()
+                .Property(e => e.Date)
+                .IsRequired();
+
             modelBuilder.Entity<ViolationType>()
                 .Property(e => e.Type)
                 .IsUnicode(false);

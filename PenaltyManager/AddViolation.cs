@@ -13,34 +13,13 @@ namespace PenaltyManager
     public partial class AddViolation : Form
     {
         Form parentForm = null;
+        RoadPenaltyContext db;
 
         public AddViolation(Form parent)
         {
             InitializeComponent();
             parentForm = parent;
-        }
-
-        private void update_driver_info()
-        {
-            if (comboBox_driverID.SelectedValue == null)
-                return;
-
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            Driver driver = db.Drivers.Find((int)comboBox_driverID.SelectedValue);
-            label_driverName.Text = driver.FullName;
-            label_driverLicense.Text = driver.License;
-        }
-
-        private void update_car_info()
-        {
-            RoadPenaltyContext db = new RoadPenaltyContext();
-            if (comboBox_carID.SelectedValue == null)
-                return;
-
-            Automobile car = db.Automobiles.Find((int)comboBox_carID.SelectedValue);
-            label_carManufacturer.Text = car.Model.Manufacturer.ManufacturerName;
-            label_carModel.Text = car.Model.Model1;
-            label_carNumber.Text = car.Number;
+            db = new RoadPenaltyContext();
         }
 
         private void update_fine_info()
@@ -48,21 +27,34 @@ namespace PenaltyManager
             if (comboBox_violationType.SelectedItem == null)
                 return;
 
-            RoadPenaltyContext db = new RoadPenaltyContext();
             ViolationType type = db.ViolationTypes.Find(comboBox_violationType.SelectedItem);
             label_fine.Text = type.Fine.ToString();
         }
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            RoadPenaltyContext db = new RoadPenaltyContext();
             Violation vio = new Violation();
-            vio.Driver_id = (int)comboBox_driverID.SelectedValue;
-            vio.Driver = db.Drivers.Find(vio.Driver_id);
-            vio.Automobile_id = (int)comboBox_carID.SelectedValue;
-            vio.Automobile = db.Automobiles.Find(vio.Automobile_id);
-            vio.ViolationType = db.ViolationTypes.Find(comboBox_violationType.SelectedItem);
-            vio.Type = vio.ViolationType.Type;
+
+            Driver foundDriver = db.Drivers.Where(f => f.FullName == comboBox_driverID.SelectedItem.ToString() &&
+                                                  f.License == comboBox_license.SelectedItem.ToString()).FirstOrDefault();
+
+            Automobile foundCar = db.Automobiles.Where(f => f.Number == comboBox_carID.SelectedItem.ToString()).FirstOrDefault();
+            ViolationType vioType = db.ViolationTypes.Where(f => f.Type == comboBox_violationType.SelectedItem.ToString()).FirstOrDefault();
+            DateTime selectedDate = dateTimePicker1.Value;
+
+            if (foundDriver == null ||
+                foundCar == null ||
+                vioType == null)
+            {
+                MainWindow.ShowError("Could not find either a driver or a car or a violation type");
+                return;
+            }
+
+            vio.Driver = foundDriver;
+            vio.Automobile = foundCar;
+            vio.ViolationType = vioType;
+            vio.Date = selectedDate;
+
             db.Violations.Add(vio);
             db.SaveChanges();
 
@@ -73,17 +65,7 @@ namespace PenaltyManager
 
             Close();
         }
-
-        private void comboBox_driverID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            update_driver_info();
-        }
-
-        private void comboBox_carID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            update_car_info();
-        }
-
+        
         private void comboBox_violationType_SelectedIndexChanged(object sender, EventArgs e)
         {
             update_fine_info();
@@ -91,27 +73,55 @@ namespace PenaltyManager
 
         private void fill_violation_combobox()
         {
-            RoadPenaltyContext db = new RoadPenaltyContext();
             comboBox_violationType.Items.Clear();
             db.ViolationTypes.ToList().ForEach(e => comboBox_violationType.Items.Add(e.Type));
         }
 
         private void AddViolation_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Automobile' table. You can move, or remove it, as needed.
-            this.automobileTableAdapter.Fill(this.roadPenaltiesDataSet.Automobile);
-            // TODO: This line of code loads data into the 'roadPenaltiesDataSet.Driver' table. You can move, or remove it, as needed.
-            this.driverTableAdapter.Fill(this.roadPenaltiesDataSet.Driver);
+            foreach(var car in db.Automobiles)
+            {
+                comboBox_carID.Items.Add(car.Number);
+            }
+            comboBox_carID.SelectedItem = comboBox_carID.Items[0];
+
+            foreach (var driver in db.Drivers)
+            {
+                if (!comboBox_driverID.Items.Contains(driver.FullName))
+                {
+                    comboBox_driverID.Items.Add(driver.FullName);
+                }
+            }
+            comboBox_driverID.SelectedItem = comboBox_driverID.Items[0];
+
+            FillLicenses();
+            comboBox_license.SelectedItem = comboBox_license.Items[0];
+
             fill_violation_combobox();
             comboBox_violationType.SelectedIndex = comboBox_violationType.Items.Count - 1;
-            update_driver_info();
-            update_car_info();
+            
             update_fine_info();
+        }
+
+        private void FillLicenses()
+        {
+            comboBox_license.Items.Clear();
+            var selectedDrivers = db.Drivers.Where(f => f.FullName == comboBox_driverID.SelectedItem.ToString());
+            foreach (var driver in selectedDrivers)
+            {
+                comboBox_license.Items.Add(driver.License);
+            }
         }
 
         private void AddViolation_FormClosed(object sender, FormClosedEventArgs e)
         {
             parentForm.Enabled = true;
+        }
+
+        private void comboBox_driverID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillLicenses();
+            comboBox_license.SelectedItem = comboBox_license.Items[0];
         }
     }
 }

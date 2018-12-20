@@ -53,6 +53,17 @@ namespace PenaltyManager
         {
             panel7.Visible = false;
 
+            button_addViolation.Visible = false;
+            button_editViolation.Visible = false;
+            button_removeViolation.Visible = false;
+
+            button_manageInsurances.Visible = false;
+            button_addCar.Visible = false;
+            button_addDriver.Visible = false;
+            button_addDriverCarConnection.Visible = false;
+            button_editRemoveFoundEntity.Visible = false;
+            button_editDriverCarConnection.Visible = false;
+
             tabControl1.TabPages.RemoveAt(2);
         }
 
@@ -60,6 +71,8 @@ namespace PenaltyManager
         {
             if (Environment.UserName == "InsufficientUser") //InsufficientUser //Andrei
                 RemoveAdminButtons();
+
+            label_userName.Text = Environment.UserName;
 
             InitAllTables();
             RefreshAllTables();
@@ -231,11 +244,14 @@ namespace PenaltyManager
         private void init_violations_table()
         {
             RoadPenaltyContext db = new RoadPenaltyContext();
+            grid_violations.Columns.Add("Date", "Date");
+            grid_violations.Columns.Add("Car number", "Car number");
             grid_violations.Columns.Add("CarManufacturer", "Car manufacturer");
             grid_violations.Columns.Add("CarModel", "Car model");
             grid_violations.Columns.Add("CarColor", "Car color");
-            grid_violations.Columns.Add("DriverName", "Driver Name");
-            grid_violations.Columns.Add("ViolationType", "Violation Type");
+            grid_violations.Columns.Add("Driver Name", "Driver Name");
+            grid_violations.Columns.Add("License number", "License number");
+            grid_violations.Columns.Add("Violation Type", "Violation Type");
             grid_violations.Columns.Add("Fine", "Fine");
             refresh_violations_table();
         }
@@ -247,10 +263,13 @@ namespace PenaltyManager
             db.Violations.ToList().ForEach(e =>
             {
                 grid_violations.Rows.Add(
+                    e.Date,
+                    e.Automobile.Number,
                     e.Automobile.Model.Manufacturer.ManufacturerName,
                     e.Automobile.Model.Model1,
                     e.Automobile.Color.ColorName,
                     e.Driver.FullName,
+                    e.Driver.License,
                     e.ViolationType.Type,
                     e.ViolationType.Fine);
             });
@@ -290,16 +309,51 @@ namespace PenaltyManager
 
         private void button_editViolation_Click(object sender, EventArgs e)
         {
-            EditViolationNew violEdit = new EditViolationNew(this);
+            int selectedIndex = grid_violations.SelectedCells[0].RowIndex;
+
+            string driverName = grid_violations.Rows[selectedIndex].Cells["Driver Name"].Value.ToString();
+            string carNumber = grid_violations.Rows[selectedIndex].Cells["Car number"].Value.ToString();
+            string licenseNumber = grid_violations.Rows[selectedIndex].Cells["License number"].Value.ToString();
+            string violType = grid_violations.Rows[selectedIndex].Cells["Violation type"].Value.ToString();
+
+            RoadPenaltyContext db = new RoadPenaltyContext();
+
+            Violation foundViol = db.Violations.Where(f =>
+            f.Driver.FullName == driverName &&
+            f.Driver.License == licenseNumber &&
+            f.Automobile.Number == carNumber &&
+            f.ViolationType.Type == violType).FirstOrDefault();
+
+            EditViolationNew violEdit = new EditViolationNew(this, db, foundViol);
             violEdit.Show();
             Enabled = false;
         }
 
         private void button_removeViolation_Click(object sender, EventArgs e)
         {
-            RemoveViolation violForm = new RemoveViolation(this);
-            violForm.Show();
-            Enabled = false;
+            int selectedIndex = grid_violations.SelectedCells[0].RowIndex;
+
+            string driverName = grid_violations.Rows[selectedIndex].Cells["Driver Name"].Value.ToString();
+            string carNumber = grid_violations.Rows[selectedIndex].Cells["Car number"].Value.ToString();
+            string licenseNumber = grid_violations.Rows[selectedIndex].Cells["License number"].Value.ToString();
+            string violType = grid_violations.Rows[selectedIndex].Cells["Violation type"].Value.ToString();
+
+            RoadPenaltyContext db = new RoadPenaltyContext();
+            
+            Violation foundViol = db.Violations.Where(f =>
+            f.Driver.FullName == driverName &&
+            f.Driver.License == licenseNumber &&
+            f.Automobile.Number == carNumber &&
+            f.ViolationType.Type == violType).FirstOrDefault();
+            if(foundViol == null)
+            {
+                ShowError("Could not find a violaion with driver " + driverName + " " + licenseNumber +
+                    " and car number " + carNumber + " and violation type " + violType);
+                return;
+            }
+            db.Violations.Remove(foundViol);
+            db.SaveChanges();
+            refresh_violations_table();
         }
 
         private void button_removeViolationType_Click(object sender, EventArgs e)
@@ -449,12 +503,14 @@ namespace PenaltyManager
                 ShowWarning("Looks like the provided driver is not in an insurance.");
                 return;
             }
-            
+
             // search for all insurances this driver in
             foreach(var ins in driver.Insurances)
             {
                 // get all cars
                 var car = ins.Automobiles.FirstOrDefault();
+                if (car == null)
+                    continue;
                 dataGridView_searchResults.Rows.Add(
                     car.Number,
                     car.Model.Manufacturer.ManufacturerName,
@@ -502,9 +558,9 @@ namespace PenaltyManager
             }
             else if(m_foundCarID != -1)
             {
-                FoundDriverInfo form = new FoundDriverInfo(m_foundCarID, this);
-                form.Show();
-                return;
+                //FoundDriverInfo form = new FoundDriverInfo(m_foundCarID, this);
+                //form.Show();
+                //return;
             }
         }
 

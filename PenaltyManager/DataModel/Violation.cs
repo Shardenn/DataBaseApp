@@ -24,6 +24,8 @@ namespace PenaltyManager
 
         public virtual Driver Driver { get; set; }
 
+        public virtual DateTime Date { get; set; }
+
         public virtual ViolationType ViolationType { get; set; }
     }
 }
